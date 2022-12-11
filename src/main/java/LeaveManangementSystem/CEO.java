@@ -7,17 +7,19 @@ import java.util.ArrayList;
  * @author zahid
  */
 public class CEO extends Users {
+    
+    
 
     public static void createEmployee(String firstName, String lastName, String username, Manager manager, String password) {
         Company.createEmployee(firstName, lastName, username, manager, password);
     }
 
-    public static void createManger(String firstName, String lastName, String username, String password) {
+    public static void createManager(String firstName, String lastName, String username, String password) {
         Company.createManager(firstName, lastName, username, password);
 
     }
 
-    void viewEmployeeWithPassword(ArrayList<Employee> employeeDetails) {
+    public void viewEmployeeWithPassword(ArrayList<Employee> employeeDetails) {
         System.out.println("Employee List With Password");
 
         for (Employee employeeDetail : employeeDetails) {
@@ -27,7 +29,7 @@ public class CEO extends Users {
 
     }
 
-    void viewManagerWithPassword(ArrayList<Manager> managerDetails) {
+    public void viewManagerWithPassword(ArrayList<Manager> managerDetails) {
         System.out.println("Manager List With Password");
 
         for (Manager managerDetail : managerDetails) {

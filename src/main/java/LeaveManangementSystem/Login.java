@@ -10,6 +10,7 @@ public class Login {
     public CEO checkCeo(String username, String password) {
 
         if (username.equalsIgnoreCase(Company.ceo.getUsername()) && password.equals(Company.ceo.getPassword())) {
+            System.out.println("Welcome " + username);
             return Company.ceo;
         }
         return null;

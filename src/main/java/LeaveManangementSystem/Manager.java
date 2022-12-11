@@ -14,6 +14,9 @@ public class Manager extends Employee {
         getWhoIsResponsibleEmployees().add(employee);
 
     }
+    
+    
+    
     //Beggining of encapsulation
     public static ArrayList<Employee> getWhoIsResponsibleEmployees() {
         return WhoIsResponsibleEmployees;

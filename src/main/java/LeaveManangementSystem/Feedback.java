@@ -10,22 +10,22 @@ import java.util.Scanner;
 public class Feedback {
 
     Scanner scan = new Scanner(System.in);
-    private String managerUsername;
-    private String managerPassword;
+    private String CEOUsername;
+    private String CEOPassword;
 
     public Feedback(String scanUsername, String scanPassword) {
 
-        this.managerUsername = scanUsername;
-        this.managerPassword = scanPassword;
+        this.CEOUsername = scanUsername;
+        this.CEOPassword = scanPassword;
     }
 
     public Feedback() {
     }
-
+    
     //it is showing all employe names, available leaves and used leaves 
     public void viewEmployee(ArrayList<Employee> employeeDetails) {
         for (Employee getDetails : employeeDetails) {
-            if (getManagerUsername().equalsIgnoreCase(getDetails.getManager().getUsername())) {
+            if (getCEOUsername().equalsIgnoreCase(getDetails.getManager().getUsername())) {
                 System.out.println("Name and surname is : " + getDetails.getFirstName() + getDetails.getLastName()
                         + "\t\tAvailable Leaves : " + getDetails.getNumberOfLeavesLeft() + "\t\t Used Leaves : " + getDetails.getUsedLeave() + "\n");
             }
@@ -91,20 +91,20 @@ public class Feedback {
     }
 
     //Start of encapsulation 
-    public String getManagerUsername() {
-        return managerUsername;
+    public String getCEOUsername() {
+        return CEOUsername;
     }
 
-    public void setManagerUsername(String managerUsername) {
-        this.managerUsername = managerUsername;
+    public void setCEOUsername(String CEOUsername) {
+        this.CEOUsername = CEOUsername;
     }
 
-    public String getManagerPassword() {
-        return managerPassword;
+    public String getCEOPassword() {
+        return CEOPassword;
     }
 
-    public void setManagerPassword(String managerPassword) {
-        this.managerPassword = managerPassword;
+    public void setCEOPassword(String CEOPassword) {
+        this.CEOPassword = CEOPassword;
     }
     //End of encapsulation
 }
