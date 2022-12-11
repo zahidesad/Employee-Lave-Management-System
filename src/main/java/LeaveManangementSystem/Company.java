@@ -44,6 +44,6 @@ public class Company {
         employee.setPassword(password);
         employees.add(employee);
         manager.WhoIsResponsibleEmployees(employee);
-
+        
     }
 }

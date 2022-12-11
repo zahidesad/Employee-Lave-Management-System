@@ -6,7 +6,7 @@ package LeaveManangementSystem;
  */
 public class Employee extends Users {
 
-    private Manager admin;
+    private Manager manager;
     private int numberOfLeaveRequest, usedLeave, numberOfLeavesLeft, totalDayLeaveValue;
 
     public void requestLeave(int request) {
@@ -28,11 +28,11 @@ public class Employee extends Users {
     }
 
     public Manager getManager() {
-        return admin;
+        return manager;
     }
 
     public void setManager(Manager manager) {
-        this.admin = manager;
+        this.manager = manager;
     }
 
     //The number of days leave requested

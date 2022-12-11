@@ -42,9 +42,9 @@ public class Feedback {
 
     }
 
-    //Confirmation for leave to be given or not,
-    public void confirmationForLeave(Manager admin) {
-        for (Employee responsbileEmployee : admin.getWhoIsResponsibleEmployees()) {
+    //Confirmation for employee leave to be given or not,
+    public void confirmationForLeave(Manager manager) {
+        for (Employee responsbileEmployee : manager.getWhoIsResponsibleEmployees()) {
             if (responsbileEmployee.getNumberOfLeaveRequest() != 0) {
                 System.out.println("Name is " + responsbileEmployee.getUsername()
                         + "\t\t Requesting for " + responsbileEmployee.getNumberOfLeaveRequest() + "\n");
@@ -55,7 +55,7 @@ public class Feedback {
                 a = scan.nextInt();
 
                 switch (a) {
-                    //if admin confirms the request
+                    //if manager confirms the request
                     case 1:
                         int leave = responsbileEmployee.getNumberOfLeavesLeft();
                         int deduct = responsbileEmployee.getNumberOfLeaveRequest();
@@ -69,7 +69,7 @@ public class Feedback {
                         System.out.println("Leaves granted.\n");
                         break;
 
-                    // if admin rejects request    
+                    // if manager rejects request    
                     case 2:
                         System.out.println("Leaves Rejected.\n");
                         //responsbileEmployee.setTotalDayLeaveValue(0);
