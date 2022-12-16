@@ -169,7 +169,7 @@ public class Test {
                     if (emp != null) {
                         System.out.println("Welcome " + username);
 
-                        while (true) {
+                        while (emp!=null) {
                             int b = 0;
                             int request = 0;
                             System.out.println("1. View  Leaves" + "\n" + "2. Apply for leave application" + "\n" + "3. Logout");
