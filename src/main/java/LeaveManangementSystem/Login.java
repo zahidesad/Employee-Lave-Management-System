@@ -8,9 +8,10 @@ public class Login {
 
     //CEO verification
     public CEO checkCeo(String username, String password) {
-
+        Company.ceo.setUsername("admin");
+        Company.ceo.setPassword("123456!");
         if (username.equalsIgnoreCase(Company.ceo.getUsername()) && password.equals(Company.ceo.getPassword())) {
-            System.out.println("Welcome " + username);
+            System.out.println("Welcome " + username + "\n");
             return Company.ceo;
         }
         return null;
@@ -22,7 +23,6 @@ public class Login {
         for (Manager checkManager : Company.managers) {
             if (username.equalsIgnoreCase(checkManager.getUsername()) && password.equals(checkManager.getPassword())) {
 
-                System.out.println("Welcome " + username);
                 return checkManager;
             }
 
@@ -36,7 +36,7 @@ public class Login {
         for (Employee checkEmployee : Company.employees) {
             if (username.equalsIgnoreCase(checkEmployee.getUsername())
                     && password.equals(checkEmployee.getPassword())) {
-                System.out.println("Welcome " + username);
+
                 return checkEmployee;
 
             }

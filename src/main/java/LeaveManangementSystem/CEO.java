@@ -7,15 +7,14 @@ import java.util.ArrayList;
  * @author zahid
  */
 public class CEO extends Users {
-    
-    
 
-    public static void createEmployee(String firstName, String lastName, String username, Manager manager, String password) {
-        Company.createEmployee(firstName, lastName, username, manager, password);
+    public static void createEmployee(String firstName, String lastName, String username, Manager manager,
+            int numberOfLeavesLeft, int totalDayLeaveValue) {
+        Company.createEmployee(firstName, lastName, username, manager, totalDayLeaveValue);
     }
 
-    public static void createManager(String firstName, String lastName, String username, String password) {
-        Company.createManager(firstName, lastName, username, password);
+    public static void createManager(String firstName, String lastName, String username) {
+        Company.createManager(firstName, lastName, username);
 
     }
 
@@ -35,6 +34,17 @@ public class CEO extends Users {
         for (Manager managerDetail : managerDetails) {
             System.out.println("Name and surname are : " + managerDetail.getFirstName() + managerDetail.getLastName()
                     + "\t\tUsername is : " + managerDetail.getUsername() + "\t\tPassword is : " + managerDetail.getPassword());
+
+        }
+
+    }
+
+    public void viewManagerWithoutPassword() {
+        System.out.println("Manager List :");
+
+        for (int i = 0; i < Company.managers.size(); i++) {
+            System.out.println((i + 1) + ": " + Company.managers.get(i).getFirstName() +" "+ Company.managers.get(i).getLastName()
+                    + "\t\tNumber of emmployees responsible : " + Company.managers.get(i).getWhoIsResponsibleEmployees().size());
 
         }
 

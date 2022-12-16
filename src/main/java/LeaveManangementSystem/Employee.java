@@ -9,6 +9,17 @@ public class Employee extends Users {
     private Manager manager;
     private int numberOfLeaveRequest, usedLeave, numberOfLeavesLeft, totalDayLeaveValue;
 
+    public Employee(String firstName, String lastName, String username,
+            int totalDayLeaveValue) {
+        super(firstName, lastName, username);
+        this.totalDayLeaveValue = totalDayLeaveValue;
+        numberOfLeavesLeft = totalDayLeaveValue;
+
+    }
+
+    public Employee() {
+    }
+
     public void requestLeave(int request) {
 
         // it checks if requested number of leaves are available or not
@@ -16,17 +27,20 @@ public class Employee extends Users {
             System.out.println("You don't have sufficient free leaves");
         } else {
             System.out.println("Requested for " + request + "days");
-            requestLeave(request);
+            numberOfLeavesLeft-=request;
+            numberOfLeaveRequest=request;
+            
 
         }
     }
-    //Beginning of Encapsulation
 
     //Number of leave available
     public void viewleave() {
         System.out.println("Your free leaves are:" + getNumberOfLeavesLeft());
     }
 
+    //Beginning of Encapsulation
+    //Number of leave available
     public Manager getManager() {
         return manager;
     }

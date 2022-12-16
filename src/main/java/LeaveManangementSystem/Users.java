@@ -11,12 +11,20 @@ public class Users {
     private String firstName, lastName, username, password;
     private long id;
     
+    public Users(String firstName, String lastName, String username ) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        
+    }
+    public Users() {
+    }
+
     Random random = new Random();
 
-    public long randomIdGenerator(){
-    
-    return random.nextLong(1000000000L,9999999999L);
-    
+    public void randomIdGenerator() {
+        this.id = random.nextLong(1000000000L, 9999999999L);
+        this.password = String.valueOf(id);
     }
 
     //Beginning of Encapsulation
@@ -91,6 +99,5 @@ public class Users {
 
     }
     ////End of Encapsulation
-    
 
 }

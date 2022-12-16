@@ -10,39 +10,28 @@ import java.util.Scanner;
 public class Feedback {
 
     Scanner scan = new Scanner(System.in);
-    private String CEOUsername;
-    private String CEOPassword;
 
-    public Feedback(String scanUsername, String scanPassword) {
-
-        this.CEOUsername = scanUsername;
-        this.CEOPassword = scanPassword;
-    }
-
-    public Feedback() {
-    }
-    
-    //it is showing all employe names, available leaves and used leaves 
-    public void viewEmployee(ArrayList<Employee> employeeDetails) {
-        for (Employee getDetails : employeeDetails) {
-            if (getCEOUsername().equalsIgnoreCase(getDetails.getManager().getUsername())) {
-                System.out.println("Name and surname is : " + getDetails.getFirstName() + getDetails.getLastName()
-                        + "\t\tAvailable Leaves : " + getDetails.getNumberOfLeavesLeft() + "\t\t Used Leaves : " + getDetails.getUsedLeave() + "\n");
+    //it is showing all employee names, available leaves and used leaves (Manager)
+    public void viewEmployee(Manager manager) {
+        for (Employee employee : Company.employees) {
+            if (manager.getUsername().equalsIgnoreCase(employee.getManager().getUsername())) {
+                System.out.println("Name and surname is : " + employee.getFirstName() + employee.getLastName()
+                        + "\t\tAvailable Leaves : " + employee.getNumberOfLeavesLeft() + "\t\t Used Leaves : " + employee.getUsedLeave() + "\n");
             }
 
         }
     }
 
-    //print all the leave requests of employee
-    public void emlpoyeeRequests(ArrayList<Employee> employeeDetails) {
-        for (Employee getDetails : employeeDetails) {
-            System.out.println("Name and surname is : " + getDetails.getFirstName() + getDetails.getLastName()
-                    + "\t\tRequesting for " + getDetails.getNumberOfLeaveRequest() + " Days \n");
+    //print all the leave requests of employee (CEO)
+    public void emlpoyeeRequests() {
+        for (Employee employee : Company.employees) {
+            System.out.println("Name and surname is : " + employee.getFirstName() + employee.getLastName()
+                    + "\t\tRequesting for " + employee.getNumberOfLeaveRequest() + " Days \n");
         }
 
     }
 
-    //Confirmation for employee leave to be given or not,
+    //Confirmation for employee leave to be given or not (Manager)
     public void confirmationForLeave(Manager manager) {
         for (Employee responsbileEmployee : manager.getWhoIsResponsibleEmployees()) {
             if (responsbileEmployee.getNumberOfLeaveRequest() != 0) {
@@ -65,14 +54,12 @@ public class Feedback {
                         int used = responsbileEmployee.getUsedLeave();
 
                         responsbileEmployee.setUsedLeave(used);
-                        //responsbileEmployee.setTotalDayLeaveValue(0);
                         System.out.println("Leaves granted.\n");
                         break;
 
                     // if manager rejects request    
                     case 2:
                         System.out.println("Leaves Rejected.\n");
-                        //responsbileEmployee.setTotalDayLeaveValue(0);
                         break;
 
                     case 3:
@@ -90,21 +77,4 @@ public class Feedback {
 
     }
 
-    //Start of encapsulation 
-    public String getCEOUsername() {
-        return CEOUsername;
-    }
-
-    public void setCEOUsername(String CEOUsername) {
-        this.CEOUsername = CEOUsername;
-    }
-
-    public String getCEOPassword() {
-        return CEOPassword;
-    }
-
-    public void setCEOPassword(String CEOPassword) {
-        this.CEOPassword = CEOPassword;
-    }
-    //End of encapsulation
 }
