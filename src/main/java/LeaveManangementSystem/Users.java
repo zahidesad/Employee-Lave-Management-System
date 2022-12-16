@@ -11,7 +11,7 @@ public class Users {
     private String firstName, lastName, username, password;
     private long id;
     
-    public Users(String firstName, String lastName, String username ) {
+    public Users(String firstName, String lastName, String username) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
