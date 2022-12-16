@@ -27,8 +27,8 @@ public class Employee extends Users {
             System.out.println("You don't have sufficient free leaves");
         } else {
             System.out.println("Requested for " + request + "days");
-            numberOfLeavesLeft-=request;
-            numberOfLeaveRequest=request;
+            
+            numberOfLeaveRequest+=request;
             
 
         }

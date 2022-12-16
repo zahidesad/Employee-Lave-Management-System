@@ -51,15 +51,17 @@ public class Feedback {
                         leave -= deduct;
 
                         responsbileEmployee.updateLeave(leave);
-                        int used = responsbileEmployee.getUsedLeave();
+                        int used = responsbileEmployee.getUsedLeave()+responsbileEmployee.getNumberOfLeaveRequest();
 
                         responsbileEmployee.setUsedLeave(used);
+                        responsbileEmployee.setNumberOfLeaveRequest(0);
                         System.out.println("Leaves granted.\n");
                         break;
 
                     // if manager rejects request    
                     case 2:
                         System.out.println("Leaves Rejected.\n");
+                        responsbileEmployee.setNumberOfLeaveRequest(0);
                         break;
 
                     case 3:
