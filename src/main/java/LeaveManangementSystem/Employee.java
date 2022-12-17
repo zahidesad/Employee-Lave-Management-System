@@ -27,9 +27,9 @@ public class Employee extends Users {
         // it checks if requested number of leaves are available or not
         if (request > numberOfLeavesLeft || request > numberOfLeavesLeft - numberOfLeaveRequest
                 || totalDayLeaveValue - numberOfLeaveRequest < request) {
-            System.out.println("\nYou don't have sufficient free leaves. Please enter a valid number of days leave");
+            System.out.println(ConsoleColorsCode.RED + "\nYou don't have sufficient free leaves. Please enter a valid number of days leave" + ConsoleColorsCode.RESET);
         } else {
-            System.out.println("\nYour request for a " + request + " day leave request has been received ");
+            System.out.println(ConsoleColorsCode.GREEN+"\nYour request for a " + request + " day leave request has been received "+ConsoleColorsCode.RESET);
             numberOfLeaveRequest += request;
 
         }
@@ -37,7 +37,7 @@ public class Employee extends Users {
 
     //Number of leave available
     public void viewleave() {
-        System.out.println("\n\nYour free leaves are " + getNumberOfLeavesLeft()+ " days");
+        System.out.println("\n\nYour free leaves are " + getNumberOfLeavesLeft() + " days");
     }
 
     //Beginning of Encapsulation

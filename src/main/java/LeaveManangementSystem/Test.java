@@ -51,8 +51,8 @@ public class Test {
                     while (ceo != null) {
 
                         System.out.println("\n1)Press to add manager or employee" + "\n" + "2)Press to view Manager Requests" + "\n"
-                                + "3)Press to grant report manager" + "\n" + "4)Press to view report of manager"
-                                + "\n" + "5)Press to report of Employee" + "\n" + "6)Press to logout");
+                                + "3)Press to grant report manager" + "\n" + "4)Press to view report of managers"
+                                + "\n" + "5)Press to view report of employees" + "\n" + "6)Press to logout");
 
                         System.out.print("\nPlease enter your choice : ");
                         a = scan.nextInt();
@@ -75,16 +75,14 @@ public class Test {
                                         String lastName = scan.nextLine();
 
                                         String ManagerUsername = firstName + lastName;
-                                        //System.out.println("Your manager's username is " + ManagerUsername + " .Please tell him/her that");
 
                                         System.out.print("Please enter your manager's total annual leave entitlement : ");
                                         int totalDayLeaveValue = scan.nextInt();
 
                                         ceo.createManager(firstName, lastName, ManagerUsername, totalDayLeaveValue);
                                         Company.managers.get(Company.managers.size() - 1);
-                                        System.out.println("\n************************************************************************************");
                                         System.out.println("Your manager's username is " + '"' + ConsoleColorsCode.GREEN_BOLD + ManagerUsername + ConsoleColorsCode.RESET + '"'
-                                                + "\t\tYour manager's password is " + '"' + ConsoleColorsCode.BLUE_BOLD + Company.managers.get(Company.managers.size()-1).getPassword() + ConsoleColorsCode.RESET + '"'
+                                                + "\t\tYour manager's password is " + '"' + ConsoleColorsCode.BLUE_BOLD + Company.managers.get(Company.managers.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
                                                 + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!!");
 
                                         continue;
@@ -99,7 +97,6 @@ public class Test {
                                         String lastName = scan.nextLine();
 
                                         String EmployeeUsername = firstName + lastName;
-                                        //System.out.println("Your employee's username : " + EmployeeUsername + " Please tell him/her that");
 
                                         System.out.print("Please enter your employee's total annual leave entitlement : ");
                                         int totalDayLeaveValue = scan.nextInt();
@@ -111,7 +108,6 @@ public class Test {
                                         Manager manager = Company.managers.get(a - 1);
 
                                         Company.createEmployee(firstName, lastName, EmployeeUsername, manager, totalDayLeaveValue);
-                                        System.out.println("\n************************************************************************************");
                                         System.out.println("Your employee's username is " + '"' + ConsoleColorsCode.GREEN_BOLD + EmployeeUsername + ConsoleColorsCode.RESET + '"'
                                                 + "\t\tYour employee's password is " + '"' + ConsoleColorsCode.BLUE_BOLD + Company.employees.get(Company.employees.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
                                                 + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!!");

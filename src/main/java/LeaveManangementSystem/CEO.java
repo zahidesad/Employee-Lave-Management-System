@@ -19,7 +19,7 @@ public class CEO extends Users {
     }
 
     public void viewEmployeeWithPassword(ArrayList<Employee> employeeDetails) {
-        System.out.println("\n\nEmployee List With Password");
+        System.out.println(ConsoleColorsCode.BLUE_BOLD+"\n\nEmployee List With Password" + ConsoleColorsCode.RESET);
 
         for (Employee employeeDetail : employeeDetails) {
             System.out.println("Name and surname are : " + employeeDetail.getFirstName()+ " " + employeeDetail.getLastName()
@@ -29,7 +29,7 @@ public class CEO extends Users {
     }
 
     public void viewManagerWithPassword(ArrayList<Manager> managerDetails) {
-        System.out.println("\n\nManager List With Password :");
+        System.out.println(ConsoleColorsCode.BLUE_BOLD+"\n\nManager List With Password :"+ConsoleColorsCode.RESET);
 
         for (Manager managerDetail : managerDetails) {
             System.out.println("Name and surname are : " + managerDetail.getFirstName()+ " " + managerDetail.getLastName()
@@ -40,7 +40,7 @@ public class CEO extends Users {
     }
 
     public void viewManagerWithoutPassword() {
-        System.out.println("\n\nManager List :");
+        System.out.println(ConsoleColorsCode.BLUE_BOLD+"\n\nManager List :"+ConsoleColorsCode.RESET);
 
         for (int i = 0; i < Company.managers.size(); i++) {
             System.out.println((i + 1) + ") " + Company.managers.get(i).getFirstName() +" "+ Company.managers.get(i).getLastName()
