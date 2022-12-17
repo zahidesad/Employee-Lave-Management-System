@@ -9,9 +9,9 @@ public class Login {
     //CEO verification
     public CEO checkCeo(String username, String password) {
         Company.ceo.setUsername("admin");
-        Company.ceo.setPassword("123456!");
+        Company.ceo.setPassword("123");
         if (username.equalsIgnoreCase(Company.ceo.getUsername()) && password.equals(Company.ceo.getPassword())) {
-            System.out.println("Welcome " + username + "\n");
+            System.out.print("\n----------Welcome " + username + "----------");
             return Company.ceo;
         }
         return null;

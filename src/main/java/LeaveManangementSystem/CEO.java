@@ -13,26 +13,26 @@ public class CEO extends Users {
         Company.createEmployee(firstName, lastName, username, manager, totalDayLeaveValue);
     }
 
-    public static void createManager(String firstName, String lastName, String username) {
-        Company.createManager(firstName, lastName, username);
+    public static void createManager(String firstName, String lastName, String username,int totalDayLeaveValue) {
+        Company.createManager(firstName, lastName, username, totalDayLeaveValue);
 
     }
 
     public void viewEmployeeWithPassword(ArrayList<Employee> employeeDetails) {
-        System.out.println("Employee List With Password");
+        System.out.println("\n\nEmployee List With Password");
 
         for (Employee employeeDetail : employeeDetails) {
-            System.out.println("Name and surname are : " + employeeDetail.getFirstName() + employeeDetail.getLastName()
+            System.out.println("Name and surname are : " + employeeDetail.getFirstName()+ " " + employeeDetail.getLastName()
                     + "\t\tUsername is : " + employeeDetail.getUsername() + "\t\tPassword is : " + employeeDetail.getPassword());
         }
 
     }
 
     public void viewManagerWithPassword(ArrayList<Manager> managerDetails) {
-        System.out.println("Manager List With Password");
+        System.out.println("\n\nManager List With Password :");
 
         for (Manager managerDetail : managerDetails) {
-            System.out.println("Name and surname are : " + managerDetail.getFirstName() + managerDetail.getLastName()
+            System.out.println("Name and surname are : " + managerDetail.getFirstName()+ " " + managerDetail.getLastName()
                     + "\t\tUsername is : " + managerDetail.getUsername() + "\t\tPassword is : " + managerDetail.getPassword());
 
         }
@@ -40,11 +40,11 @@ public class CEO extends Users {
     }
 
     public void viewManagerWithoutPassword() {
-        System.out.println("Manager List :");
+        System.out.println("\n\nManager List :");
 
         for (int i = 0; i < Company.managers.size(); i++) {
-            System.out.println((i + 1) + ": " + Company.managers.get(i).getFirstName() +" "+ Company.managers.get(i).getLastName()
-                    + "\t\tNumber of emmployees responsible : " + Company.managers.get(i).getWhoIsResponsibleEmployees().size());
+            System.out.println((i + 1) + ") " + Company.managers.get(i).getFirstName() +" "+ Company.managers.get(i).getLastName()
+                    + "\t-----> Number of emmployees responsible : " + Company.managers.get(i).getWhoIsResponsibleEmployees().size());
 
         }
 

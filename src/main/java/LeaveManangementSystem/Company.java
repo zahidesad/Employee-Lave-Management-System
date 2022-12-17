@@ -14,7 +14,7 @@ public class Company {
     
     
 
-    public static void createManager(String firstName, String lastName, String username) {
+    public static void createManager(String firstName, String lastName, String username,int totalDayLeaveValue) {
         for (Manager manager1 : managers) {
             if (username.equals(manager1.getUsername())) {
                 System.out.println("This username already exist.");
@@ -22,7 +22,7 @@ public class Company {
             }
         }
 
-        Manager manager = new Manager();
+        Manager manager = new Manager(firstName, lastName, username,totalDayLeaveValue);
         manager.setFirstName(firstName);
         manager.setLastName(lastName);
         manager.randomIdGenerator();

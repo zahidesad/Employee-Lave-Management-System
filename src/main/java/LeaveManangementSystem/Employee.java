@@ -7,8 +7,9 @@ package LeaveManangementSystem;
 public class Employee extends Users {
 
     private Manager manager;
-    private int numberOfLeaveRequest, usedLeave, numberOfLeavesLeft, totalDayLeaveValue;
+    protected int numberOfLeaveRequest, usedLeave, numberOfLeavesLeft, totalDayLeaveValue;
 
+    //Beginning of the Constructor
     public Employee(String firstName, String lastName, String username,
             int totalDayLeaveValue) {
         super(firstName, lastName, username);
@@ -19,28 +20,27 @@ public class Employee extends Users {
 
     public Employee() {
     }
+    //End of the Constructor
 
     public void requestLeave(int request) {
 
         // it checks if requested number of leaves are available or not
-        if (request > getNumberOfLeavesLeft()) {
-            System.out.println("You don't have sufficient free leaves");
+        if (request > numberOfLeavesLeft || request > numberOfLeavesLeft - numberOfLeaveRequest
+                || totalDayLeaveValue - numberOfLeaveRequest < request) {
+            System.out.println("\nYou don't have sufficient free leaves. Please enter a valid number of days leave");
         } else {
-            System.out.println("Requested for " + request + "days");
-            
-            numberOfLeaveRequest+=request;
-            
+            System.out.println("\nYour request for a " + request + " day leave request has been received ");
+            numberOfLeaveRequest += request;
 
         }
     }
 
     //Number of leave available
     public void viewleave() {
-        System.out.println("Your free leaves are:" + getNumberOfLeavesLeft());
+        System.out.println("\n\nYour free leaves are " + getNumberOfLeavesLeft()+ " days");
     }
 
     //Beginning of Encapsulation
-    //Number of leave available
     public Manager getManager() {
         return manager;
     }
@@ -67,7 +67,7 @@ public class Employee extends Users {
         this.usedLeave = usedLeave;
     }
 
-    //Number of days leave remaining
+    //Number of days leave left
     public int getNumberOfLeavesLeft() {
         return numberOfLeavesLeft;
     }
@@ -86,6 +86,7 @@ public class Employee extends Users {
     }
     //End of Encapsulation
 
+    //To update the number of leaves left after the leave has been used
     public void updateLeave(int update) {
         this.numberOfLeavesLeft = update;
     }

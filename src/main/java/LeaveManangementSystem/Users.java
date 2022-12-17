@@ -10,18 +10,19 @@ public class Users {
 
     private String firstName, lastName, username, password;
     private long id;
-    
+
     public Users(String firstName, String lastName, String username) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
-        
+
     }
+
     public Users() {
     }
 
     Random random = new Random();
-
+    //Gives the user a random id which becomes the user's password
     public void randomIdGenerator() {
         this.id = random.nextLong(1000000000L, 9999999999L);
         this.password = String.valueOf(id);
@@ -64,38 +65,12 @@ public class Users {
         }
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-
-        int count = 0;
-
-        while (id > 0) {
-            id /= 10;
-            count++;
-
-        }
-        if (id == 10 && id > 0) {
-            this.id = id;
-        } else {
-            System.out.println("You entered an incorrect value.");
-
-        }
-
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
-        if (password.length() != 0 && password.contains("!")) {
-            this.password = password;
-        } else {
-            System.out.println("You entered an incorrect value.");
-        }
+        this.password = password;
 
     }
     ////End of Encapsulation
