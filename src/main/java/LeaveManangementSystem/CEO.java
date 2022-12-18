@@ -8,22 +8,29 @@ import java.util.ArrayList;
  */
 public class CEO extends Users {
 
-    public static void createEmployee(String firstName, String lastName, String username, Manager manager,
+    public  void createEmployee(String firstName, String lastName, String username, Manager manager,
             int numberOfLeavesLeft, int totalDayLeaveValue) {
         Company.createEmployee(firstName, lastName, username, manager, totalDayLeaveValue);
     }
 
-    public static void createManager(String firstName, String lastName, String username,int totalDayLeaveValue) {
+    public  void createManager(String firstName, String lastName, String username,int totalDayLeaveValue) {
         Company.createManager(firstName, lastName, username, totalDayLeaveValue);
 
+    }
+    public void removeEmployee(){
+    
+    }
+    public void removeManager(){
+    
     }
 
     public void viewEmployeeWithPassword(ArrayList<Employee> employeeDetails) {
         System.out.println(ConsoleColorsCode.BLUE_BOLD+"\n\nEmployee List With Password" + ConsoleColorsCode.RESET);
 
         for (Employee employeeDetail : employeeDetails) {
-            System.out.println("Name and surname are : " + employeeDetail.getFirstName()+ " " + employeeDetail.getLastName()
-                    + "\t\tUsername is : " + employeeDetail.getUsername() + "\t\tPassword is : " + employeeDetail.getPassword());
+            System.out.println(ConsoleColorsCode.GREEN_BOLD + employeeDetail.getFirstName()+ " " + employeeDetail.getLastName()+
+                    ConsoleColorsCode.RESET+ "\t\tUsername is : "+ConsoleColorsCode.GREEN_BOLD + employeeDetail.getUsername() + ConsoleColorsCode.RESET+
+                    "\t\tPassword is : "+ConsoleColorsCode.GREEN_BOLD + employeeDetail.getPassword() +ConsoleColorsCode.RESET);
         }
 
     }
@@ -32,8 +39,9 @@ public class CEO extends Users {
         System.out.println(ConsoleColorsCode.BLUE_BOLD+"\n\nManager List With Password :"+ConsoleColorsCode.RESET);
 
         for (Manager managerDetail : managerDetails) {
-            System.out.println("Name and surname are : " + managerDetail.getFirstName()+ " " + managerDetail.getLastName()
-                    + "\t\tUsername is : " + managerDetail.getUsername() + "\t\tPassword is : " + managerDetail.getPassword());
+            System.out.println(ConsoleColorsCode.GREEN_BOLD + managerDetail.getFirstName()+ " " + managerDetail.getLastName()+
+                   ConsoleColorsCode.RESET + "\t\tUsername is : "+ ConsoleColorsCode.GREEN_BOLD + managerDetail.getUsername() + ConsoleColorsCode.RESET+
+                    "\t\tPassword is : "+ConsoleColorsCode.GREEN_BOLD + managerDetail.getPassword()+ConsoleColorsCode.RESET);
 
         }
 

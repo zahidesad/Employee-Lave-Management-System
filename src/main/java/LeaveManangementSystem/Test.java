@@ -30,8 +30,8 @@ public class Test {
         int a = 0;
         int total = 0;
 
-        System.out.println("Select any one for login procedure\n\n" + "1.CEO \n" + "2.Manager \n" + "3.Employee");
-        System.out.print("\n\nPlease enter your choice : ");
+        System.out.println("\n\nSelect any one for login procedure\n\n" + "1.CEO \n" + "2.Manager \n" + "3.Employee");
+        System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
 
         try {
             a = scan.nextInt();
@@ -44,24 +44,29 @@ public class Test {
                 case 1:
                     CEO ceo = login.checkCeo(username, password); // Login verification for CEO
                     if (ceo == null) {
+                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nWrong usernme or password. Try again!" + ConsoleColorsCode.RESET);
                         Display();
                     }
                     Feedback f = new Feedback();
 
                     while (ceo != null) {
 
-                        System.out.println("\n1)Press to add manager or employee" + "\n" + "2)Press to view Manager Requests" + "\n"
-                                + "3)Press to grant report manager" + "\n" + "4)Press to view report of managers"
-                                + "\n" + "5)Press to view report of employees" + "\n" + "6)Press to logout");
+                        System.out.println("""
+                                           \n1)Press to add manager or employee
+                                           2)Press to view Manager Requests
+                                           3)Press to grant report manager
+                                           4)Press to view report of managers
+                                           5)Press to view report of employees
+                                           6)Press to logout""");
 
-                        System.out.print("\nPlease enter your choice : ");
+                        System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
                         a = scan.nextInt();
 
                         switch (a) {
 
                             case 1:
                                 System.out.println("\n\nPress 1 to add Manager || Press 2 to add Employee\n");
-                                System.out.print("Please enter your choice : ");
+                                System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
 
                                 a = scan.nextInt();
 
@@ -81,41 +86,46 @@ public class Test {
 
                                         ceo.createManager(firstName, lastName, ManagerUsername, totalDayLeaveValue);
                                         Company.managers.get(Company.managers.size() - 1);
-                                        System.out.println("Your manager's username is " + '"' + ConsoleColorsCode.GREEN_BOLD + ManagerUsername + ConsoleColorsCode.RESET + '"'
-                                                + "\t\tYour manager's password is " + '"' + ConsoleColorsCode.BLUE_BOLD + Company.managers.get(Company.managers.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
-                                                + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!!");
+                                        System.out.println("\n\nYour manager's username is " + '"' + ConsoleColorsCode.GREEN_BOLD + ManagerUsername + ConsoleColorsCode.RESET + '"'
+                                                + "\t\tYour manager's password is " + '"' + ConsoleColorsCode.GREEN_BOLD + Company.managers.get(Company.managers.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
+                                                + ConsoleColorsCode.RED_BOLD + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!!"
+                                                + ConsoleColorsCode.RESET);
 
                                         continue;
                                     }
                                     case 2 -> { //Creates Employee
+                                        if (!Company.managers.isEmpty()) {
+                                            System.out.print("\n\nPlease write your employee's name :  ");
+                                            String firstName = scan.nextLine();
+                                            firstName = scan.nextLine();
 
-                                        System.out.print("\n\nPlease write your employee's name :  ");
-                                        String firstName = scan.nextLine();
-                                        firstName = scan.nextLine();
+                                            System.out.print("Please write your employee's last name : ");
+                                            String lastName = scan.nextLine();
 
-                                        System.out.print("Please write your employee's last name : ");
-                                        String lastName = scan.nextLine();
+                                            String EmployeeUsername = firstName + lastName;
 
-                                        String EmployeeUsername = firstName + lastName;
+                                            System.out.print("Please enter your employee's total annual leave entitlement : ");
+                                            int totalDayLeaveValue = scan.nextInt();
 
-                                        System.out.print("Please enter your employee's total annual leave entitlement : ");
-                                        int totalDayLeaveValue = scan.nextInt();
+                                            ceo.viewManagerWithoutPassword();
 
-                                        ceo.viewManagerWithoutPassword();
+                                            System.out.print("\n\nSelect the manager who will be responsible for the employee : ");
+                                            a = scan.nextInt();
+                                            Manager manager = Company.managers.get(a - 1);
 
-                                        System.out.print("\n\nSelect the manager who will be responsible for the employee : ");
-                                        a = scan.nextInt();
-                                        Manager manager = Company.managers.get(a - 1);
-
-                                        Company.createEmployee(firstName, lastName, EmployeeUsername, manager, totalDayLeaveValue);
-                                        System.out.println("Your employee's username is " + '"' + ConsoleColorsCode.GREEN_BOLD + EmployeeUsername + ConsoleColorsCode.RESET + '"'
-                                                + "\t\tYour employee's password is " + '"' + ConsoleColorsCode.BLUE_BOLD + Company.employees.get(Company.employees.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
-                                                + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!!");
-                                        continue;
-
+                                            Company.createEmployee(firstName, lastName, EmployeeUsername, manager, totalDayLeaveValue);
+                                            System.out.println("\n\nYour employee's username is " + '"' + ConsoleColorsCode.GREEN_BOLD + EmployeeUsername + ConsoleColorsCode.RESET + '"'
+                                                    + "\t\tYour employee's password is " + '"' + ConsoleColorsCode.GREEN_BOLD + Company.employees.get(Company.employees.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
+                                                    + ConsoleColorsCode.RED_BOLD + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!"
+                                                    + ConsoleColorsCode.RESET);
+                                            continue;
+                                        } else {
+                                            System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nEmployee cannot be added without a manager." + ConsoleColorsCode.RESET);
+                                        }
                                     }
+
                                     default -> {
-                                        System.out.println("Please enter valid choice");
+                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
                                         continue;
                                     }
                                 }
@@ -150,9 +160,11 @@ public class Test {
                     Feedback feedback = new Feedback();
 
                     if (manager != null) {
-                        System.out.println("\n\n------Welcome " + username + "------");
+                        System.out.println(ConsoleColorsCode.GREEN + "\nLogin successful you are redirected to the Manager screen..." + ConsoleColorsCode.RESET);
+                        System.out.print(ConsoleColorsCode.GREEN + "\n----------Welcome " + username + "----------" + ConsoleColorsCode.RESET);
 
                     } else {
+                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nWrong usernme or password. Try again!" + ConsoleColorsCode.RESET);
                         Display();
 
                     }
@@ -161,21 +173,21 @@ public class Test {
                         int c = 0;
                         int request = 0;
                         System.out.println("\n\n1)View Leaves \n2)Apply for leave \n3)View Report \n4)View Employee Requests \n5)Grant \n6)Logout");
-                        System.out.print("\nPlease enter your choice : ");
+                        System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
                         c = scan.nextInt();
                         switch (c) {
                             case 1 ->
                                 manager.viewleave();
                             case 2 -> {
-                                System.out.println("\nYour total leaves are " + manager.getNumberOfLeavesLeft() + " days");
-                                System.out.print("\nHow many leaves do you want : ");
+                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\nYour total leaves are " + manager.getNumberOfLeavesLeft() + " days" + ConsoleColorsCode.RESET);
+                                System.out.print("How many leaves do you want : ");
                                 request = scan.nextInt();
                                 manager.requestLeave(request);
                             }
                             case 3 -> // View his/her Employee's leave report
                                 feedback.viewEmployee(manager);
                             case 4 -> // View request of his/her allocated employee
-                                feedback.emlpoyeeRequests();
+                                feedback.employeeRequests();
                             case 5 ->
                                 feedback.confirmationForEmployeeLeaves(manager);
                             case 6 ->
@@ -192,12 +204,15 @@ public class Test {
                     Employee emp = login.checkEmployee(username, password);
 
                     if (emp != null) {
-                        System.out.println("Welcome " + username);
+                        System.out.println(ConsoleColorsCode.GREEN + "\nLogin successful you are redirected to the Employee screen..." + ConsoleColorsCode.RESET);
+                        System.out.print(ConsoleColorsCode.GREEN + "\n----------Welcome " + username + "----------" + ConsoleColorsCode.RESET);
 
                         while (true) {
                             int b = 0;
                             int request = 0;
-                            System.out.println("1. View  Leaves" + "\n" + "2. Apply for leave " + "\n" + "3. Logout");
+                            System.out.println("\n\n1)View  Leaves" + "\n" + "2)Apply for leave " + "\n" + "3)Logout");
+
+                            System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
 
                             b = scan.nextInt();
                             switch (b) {
@@ -207,8 +222,8 @@ public class Test {
 
                                 case 2 -> {
                                     // Requesting leave
-                                    System.out.println("Your total leaves are: " + emp.getNumberOfLeavesLeft());
-                                    System.out.println("\nHow many leaves do you want ?");
+                                    System.out.println(ConsoleColorsCode.GREEN_BOLD + "\nYour total leaves are: " + emp.getNumberOfLeavesLeft() + ConsoleColorsCode.RESET);
+                                    System.out.print("\n\nHow many leaves do you want : ");
                                     request = scan.nextInt();
                                     emp.requestLeave(request);
                                 }
@@ -220,16 +235,20 @@ public class Test {
                             }
                         }
 
+                    }else{
+                    
+                        System.out.println(ConsoleColorsCode.RED_BOLD+ "\n\nWrong usernme or password. Try again!" + ConsoleColorsCode.RESET);
+                        Display();
                     }
                 default:
-                    System.out.println("Enter valid number ");
+                    System.out.println(ConsoleColorsCode.RED_BOLD + "Enter valid number " + ConsoleColorsCode.RESET);
                     Display();
 
             }
 
         } catch (Exception e) {
-            System.out.println(e);
-            e.printStackTrace();
+            System.out.println(ConsoleColorsCode.RED_BOLD + "Execption Occurred" + ConsoleColorsCode.RESET);
+
             Display();
 
         }

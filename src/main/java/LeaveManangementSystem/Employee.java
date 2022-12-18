@@ -37,7 +37,8 @@ public class Employee extends Users {
 
     //Number of leave available
     public void viewleave() {
-        System.out.println("\n\nYour free leaves are " + getNumberOfLeavesLeft() + " days");
+        System.out.println(ConsoleColorsCode.GREEN_BOLD+"\n\nYour free leaves are " + getNumberOfLeavesLeft() + " days" 
+        + ConsoleColorsCode.RESET+"\n");
     }
 
     //Beginning of Encapsulation

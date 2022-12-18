@@ -14,8 +14,8 @@ public class Feedback {
     //print all the leave requests of employee (CEO)
     public void ManagerRequests() {
         for (Manager manager : Company.managers) {
-            System.out.println("\n\nName and surname is : " + manager.getFirstName() + manager.getLastName()
-                    + "\t\tRequesting for " + manager.getNumberOfLeaveRequest() + " Days \n");
+            System.out.println("\n\nName and surname are : " + ConsoleColorsCode.GREEN_BOLD + manager.getFirstName() + " " + manager.getLastName()
+                    + " wants for " + manager.getNumberOfLeaveRequest() + " days leave" + "\n" + ConsoleColorsCode.RESET);
         }
 
     }
@@ -23,15 +23,13 @@ public class Feedback {
     public void confirmationForManagerLeaves(CEO ceo) {
         for (Manager manager : Company.managers) {
             if (manager.getNumberOfLeaveRequest() != 0) {
-                System.out.println("Name is " + manager.getUsername()
-                        + "\t\t Requesting for " + manager.getNumberOfLeaveRequest() + "\n");
+                System.out.println(ConsoleColorsCode.GREEN_BOLD + manager.getUsername()
+                        + " wants for " + manager.getNumberOfLeaveRequest() + " days leave" + "\n" + ConsoleColorsCode.RESET);
 
                 int a;
                 System.out.println("Please Select the action you want to do : ");
-                System.out.println("1.Confirm " + "\n" + "2.Reject" + "\n" + "3.Quit");
+                System.out.println("1)Confirm " + "\n" + "2)Reject" + "\n" + "3)Quit");
                 a = scan.nextInt();
-                
-                
 
                 switch (a) {
                     //if CEO confirms the request
@@ -45,12 +43,12 @@ public class Feedback {
 
                         manager.setUsedLeave(used);
                         manager.setNumberOfLeaveRequest(0);
-                        System.out.println("Leaves granted.\n");
+                        System.out.println(ConsoleColorsCode.GREEN_BOLD+ "Leaves granted.\n" + ConsoleColorsCode.RESET);
                         break;
 
                     // if manager rejects request    
                     case 2:
-                        System.out.println("Leaves Rejected.\n");
+                        System.out.println(ConsoleColorsCode.RED_BOLD + "Leaves Rejected.\n" + ConsoleColorsCode.RESET);
                         manager.setNumberOfLeaveRequest(0);
                         break;
 
@@ -73,18 +71,19 @@ public class Feedback {
     public void viewEmployee(Manager manager) {
         for (Employee employee : Company.employees) {
             if (manager.getUsername().equalsIgnoreCase(employee.getManager().getUsername())) {
-                System.out.println("Name and surname are : " + employee.getFirstName() + " " + employee.getLastName()
-                        + "\t\tAvailable Leaves : " + employee.getNumberOfLeavesLeft() + "\t\t Used Leaves : " + employee.getUsedLeave() + "\n");
+                System.out.println("Name and surname are : " + ConsoleColorsCode.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
+                        + ConsoleColorsCode.RESET + "\t\tAvailable Leaves : " + ConsoleColorsCode.GREEN_BOLD + employee.getNumberOfLeavesLeft() + ConsoleColorsCode.RESET
+                        + "\t\t Used Leaves : " + ConsoleColorsCode.GREEN_BOLD + employee.getUsedLeave() + ConsoleColorsCode.RESET + "\n");
             }
 
         }
     }
 
     //print all the leave requests of employee (Manager)
-    public void emlpoyeeRequests() {
+    public void employeeRequests() {
         for (Employee employee : Company.employees) {
-            System.out.println("Name and surname are : " + employee.getFirstName()+ " " + employee.getLastName()
-                    + "\t\tRequesting for " + employee.getNumberOfLeaveRequest() + " Days \n");
+            System.out.println(ConsoleColorsCode.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
+                    + " wants for " + employee.getNumberOfLeaveRequest() + " days leave" + ConsoleColorsCode.RESET + "\n");
         }
 
     }
@@ -93,8 +92,8 @@ public class Feedback {
     public void confirmationForEmployeeLeaves(Manager manager) {
         for (Employee responsbileEmployee : manager.getWhoIsResponsibleEmployees()) {
             if (responsbileEmployee.getNumberOfLeaveRequest() != 0) {
-                System.out.println("Name and surname are " + responsbileEmployee.getFirstName()+" "+ responsbileEmployee.getLastName()
-                        + "\t\t Requesting for " + responsbileEmployee.getNumberOfLeaveRequest() + "\n");
+                System.out.println(ConsoleColorsCode.GREEN_BOLD + responsbileEmployee.getFirstName() + " " + responsbileEmployee.getLastName()
+                        + " wants for " + responsbileEmployee.getNumberOfLeaveRequest() + " days leave" + ConsoleColorsCode.RESET + "\n");
 
                 int a;
                 System.out.println("\n\nPlease Select the action you want to do : ");
@@ -113,12 +112,12 @@ public class Feedback {
 
                         responsbileEmployee.setUsedLeave(used);
                         responsbileEmployee.setNumberOfLeaveRequest(0);
-                        System.out.println("\n------Leaves granted.------\n");
+                        System.out.println(ConsoleColorsCode.GREEN_BOLD+ "Leaves granted.\n" + ConsoleColorsCode.RESET);
                         break;
 
                     // if manager rejects request    
                     case 2:
-                        System.out.println("\n------Leaves Rejected.------\n");
+                        System.out.println(ConsoleColorsCode.RED_BOLD+ "Leaves Rejected.\n" + ConsoleColorsCode.RESET);
                         responsbileEmployee.setNumberOfLeaveRequest(0);
                         break;
 

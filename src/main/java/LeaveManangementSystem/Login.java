@@ -11,7 +11,8 @@ public class Login {
         Company.ceo.setUsername("admin");
         Company.ceo.setPassword("123");
         if (username.equalsIgnoreCase(Company.ceo.getUsername()) && password.equals(Company.ceo.getPassword())) {
-            System.out.print("\n----------Welcome " + username + "----------");
+            System.out.println(ConsoleColorsCode.GREEN+ "\nLogin successful you are redirected to the CEO screen..." + ConsoleColorsCode.RESET);
+            System.out.print(ConsoleColorsCode.GREEN+"\n----------Welcome " + username + "----------"+ConsoleColorsCode.RESET);
             return Company.ceo;
         }
         return null;

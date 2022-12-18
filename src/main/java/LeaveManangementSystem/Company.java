@@ -47,7 +47,7 @@ public class Company {
         employee.setUsername(username);
        
         employees.add(employee);
-        manager.WhoIsResponsibleEmployees(employee);
+        manager.SetWhoIsResponsibleEmployees(employee);
 
     }
 }
