@@ -17,10 +17,12 @@ public class CEO extends Users {
         Company.createManager(firstName, lastName, username, totalDayLeaveValue);
 
     }
-    public void removeEmployee(){
+    public void removeEmployee(String removeUsername){
+        Company.removeEmployee(removeUsername);
     
     }
-    public void removeManager(){
+    public void removeManager(String removeUsername){
+        Company.removeManager(removeUsername);
     
     }
 

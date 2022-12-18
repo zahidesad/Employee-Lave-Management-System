@@ -53,11 +53,12 @@ public class Test {
 
                         System.out.println("""
                                            \n1)Press to add manager or employee
-                                           2)Press to view Manager Requests
-                                           3)Press to grant report manager
-                                           4)Press to view report of managers
-                                           5)Press to view report of employees
-                                           6)Press to logout""");
+                                           2)Press to remove manager or employee
+                                           3)Press to view Manager Requests
+                                           4)Press to grant report manager
+                                           5)Press to view report of managers
+                                           6)Press to view report of employees
+                                           7)Press to logout""");
 
                         System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
                         a = scan.nextInt();
@@ -88,7 +89,7 @@ public class Test {
                                         Company.managers.get(Company.managers.size() - 1);
                                         System.out.println("\n\nYour manager's username is " + '"' + ConsoleColorsCode.GREEN_BOLD + ManagerUsername + ConsoleColorsCode.RESET + '"'
                                                 + "\t\tYour manager's password is " + '"' + ConsoleColorsCode.GREEN_BOLD + Company.managers.get(Company.managers.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
-                                                + ConsoleColorsCode.RED_BOLD + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!!"
+                                                + ConsoleColorsCode.GREEN_BOLD + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!!"
                                                 + ConsoleColorsCode.RESET);
 
                                         continue;
@@ -116,11 +117,12 @@ public class Test {
                                             Company.createEmployee(firstName, lastName, EmployeeUsername, manager, totalDayLeaveValue);
                                             System.out.println("\n\nYour employee's username is " + '"' + ConsoleColorsCode.GREEN_BOLD + EmployeeUsername + ConsoleColorsCode.RESET + '"'
                                                     + "\t\tYour employee's password is " + '"' + ConsoleColorsCode.GREEN_BOLD + Company.employees.get(Company.employees.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
-                                                    + ConsoleColorsCode.RED_BOLD + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!"
+                                                    + ConsoleColorsCode.GREEN_BOLD + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!"
                                                     + ConsoleColorsCode.RESET);
                                             continue;
                                         } else {
                                             System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nEmployee cannot be added without a manager." + ConsoleColorsCode.RESET);
+                                            continue;
                                         }
                                     }
 
@@ -129,25 +131,143 @@ public class Test {
                                         continue;
                                     }
                                 }
+                            case 2:
+                                System.out.println("\n\nPress 1 to remove Manager || Press 2 to remove Employee\n");
+                                System.out.print(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
 
-                            case 2: // View leave request from manager
+                                a = scan.nextInt();
+
+                                switch (a) {
+                                    case 1: //Remove Manager
+                                        if (!Company.managers.isEmpty()) {
+                                            String b;
+                                            ceo.viewManagerWithPassword(Company.managers);
+
+                                            System.out.print("\n\nPlease enter the username of the manager you want to fire : ");
+                                            String removeUsername = scan.nextLine();
+                                            removeUsername = scan.nextLine();
+
+                                            System.out.println(ConsoleColorsCode.RED + "\nDo you really want to fire your manager " + removeUsername
+                                                    + "? This action cannot be undone.\n\nIf you are sure, please write YES." + ConsoleColorsCode.RESET
+                                                    + ConsoleColorsCode.GREEN_BOLD + "\nIf you made a mistake, please write NO." + ConsoleColorsCode.RESET);
+
+                                            System.out.print("\n\nYour choice : ");
+                                            b = scan.nextLine();
+                                            if (b.equalsIgnoreCase("YES")) {
+                                                for (Manager manager : Company.managers) {
+                                                    if (removeUsername.equalsIgnoreCase(manager.getUsername()) && Company.managers.size() > 1) {
+
+                                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nYou fired a manager and the employees working under that manager are now managerless."
+                                                                + " Please select the manager you want to assign these workers to" + ConsoleColorsCode.RESET);
+                                                        for (Employee employee : manager.getWhoIsResponsibleEmployees()) {
+
+                                                            ceo.viewManagerWithoutPassword();
+                                                            System.out.println("\n\nName and surname : " + employee.getFirstName() + " " + employee.getLastName());
+                                                            System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nSelect your choice : " + ConsoleColorsCode.RESET);
+                                                            a = scan.nextInt();
+                                                            employee.setManager(Company.managers.get(a - 1));
+                                                            Company.managers.get(a - 1).SetWhoIsResponsibleEmployees(employee);
+
+                                                        }
+                                                    } else if (removeUsername.equalsIgnoreCase(manager.getUsername()) && Company.managers.size() == 1) {
+                                                        System.out.println(ConsoleColorsCode.RED_BOLD
+                                                                + "\n\nYou are deleting the only existing manager so employees under this manager will also be fired" + ConsoleColorsCode.RESET);
+                                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\nIf you still want to continue, write YES" + ConsoleColorsCode.RESET);
+                                                        System.out.println(ConsoleColorsCode.GREEN_BOLD + "If you made a mistake, please write NO" + ConsoleColorsCode.RESET);
+
+                                                        System.out.print("\n\nYour choice : ");
+                                                        b = scan.nextLine();
+
+                                                        if (b.equalsIgnoreCase("YES")) {
+                                                            for (Employee employee : manager.getWhoIsResponsibleEmployees()) {
+                                                                ceo.removeEmployee(employee.getUsername());
+                                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                                continue;
+                                                            }
+                                                        } else if (b.equalsIgnoreCase("NO")) {
+                                                            System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction cancelled, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                            continue;
+                                                        }
+
+                                                    }
+
+                                                }
+
+                                                ceo.removeManager(removeUsername);
+                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                continue;
+                                            } else if (b.equalsIgnoreCase("NO")) {
+                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction cancelled, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                continue;
+                                            } else {
+                                                System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
+                                                continue;
+                                            }
+
+                                        } else {
+                                            System.out.println(ConsoleColorsCode.RED + "\n\nYou don't have any managers." + ConsoleColorsCode.RESET);
+
+                                        }
+
+                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
+                                        continue;
+
+                                    case 2: //Remove Employee
+                                        if (!Company.employees.isEmpty()) {
+                                            String b;
+                                            ceo.viewEmployeeWithPassword(Company.employees);
+
+                                            System.out.print("\n\nPlease enter the username of the employee you want to fire : ");
+                                            String removeUsername = scan.nextLine();
+                                            removeUsername = scan.nextLine();
+
+                                            System.out.println(ConsoleColorsCode.RED + "\nDo you really want to fire your employee " + removeUsername
+                                                    + "? This action cannot be undone.\n\nIf you are sure, please write YES." + ConsoleColorsCode.RESET
+                                                    + ConsoleColorsCode.GREEN_BOLD + "\nIf you made a mistake, please write NO." + ConsoleColorsCode.RESET);
+
+                                            System.out.print("\n\nYour choice : ");
+                                            b = scan.nextLine();
+                                            if (b.equalsIgnoreCase("YES")) {
+                                                ceo.removeEmployee(removeUsername);
+                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                continue;
+                                            } else if (b.equalsIgnoreCase("NO")) {
+                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction cancelled, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                continue;
+                                            } else {
+                                                System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
+                                                continue;
+                                            }
+
+                                        } else {
+                                            System.out.println(ConsoleColorsCode.RED + "\n\nYou don't have any employees." + ConsoleColorsCode.RESET);
+
+                                        }
+
+                                    default:
+                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
+                                        continue;
+
+                                }
+
+                            case 3: // View leave request from manager
                                 f.ManagerRequests();
                                 continue;
 
-                            case 3:
+                            case 4:
                                 f.confirmationForManagerLeaves(ceo);
                                 continue;
 
-                            case 4: // View report of Manager
+                            case 5: // View report of Manager
                                 ceo.viewManagerWithPassword(Company.managers);
 
                                 continue;
 
-                            case 5: // View report of Employee
+                            case 6: // View report of Employee
                                 ceo.viewEmployeeWithPassword(Company.employees);
 
                                 continue;
-                            case 6: // Display is called for logout
+                            case 7: // Display is called for logout
                                 Display();
                             default:
                             //continue;
@@ -210,7 +330,7 @@ public class Test {
                         while (true) {
                             int b = 0;
                             int request = 0;
-                            System.out.println("\n\n1)View  Leaves" + "\n" + "2)Apply for leave " + "\n" + "3)Logout");
+                            System.out.println("\n1)View  Leaves" + "\n" + "2)Apply for leave " + "\n" + "3)Logout");
 
                             System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
 
@@ -235,9 +355,9 @@ public class Test {
                             }
                         }
 
-                    }else{
-                    
-                        System.out.println(ConsoleColorsCode.RED_BOLD+ "\n\nWrong usernme or password. Try again!" + ConsoleColorsCode.RESET);
+                    } else {
+
+                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nWrong usernme or password. Try again!" + ConsoleColorsCode.RESET);
                         Display();
                     }
                 default:
