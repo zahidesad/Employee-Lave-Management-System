@@ -11,8 +11,6 @@ public class Test {
 
     Login login;
 
-    ArrayList<CEO> CeoDetails = new ArrayList();
-
     //Constructor for initializing objects
     public Test() {
         login = new Login();
@@ -47,7 +45,6 @@ public class Test {
                         System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nWrong usernme or password. Try again!" + ConsoleColorsCode.RESET);
                         Display();
                     }
-                    Feedback f = new Feedback();
 
                     while (ceo != null) {
 
@@ -154,6 +151,7 @@ public class Test {
                                             System.out.print("\n\nYour choice : ");
                                             b = scan.nextLine();
                                             if (b.equalsIgnoreCase("YES")) {
+                                                Manager manager1 = new Manager();
                                                 for (Manager manager : Company.managers) {
                                                     if (removeUsername.equalsIgnoreCase(manager.getUsername()) && Company.managers.size() > 1) {
 
@@ -179,19 +177,58 @@ public class Test {
                                                         b = scan.nextLine();
 
                                                         if (b.equalsIgnoreCase("YES")) {
-                                                            for (Employee employee : manager.getWhoIsResponsibleEmployees()) {
-                                                                ceo.removeEmployee(employee.getUsername());
-                                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
-                                                                continue;
+                                                            System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nYou have 2 options. " + ConsoleColorsCode.RESET
+                                                                    + ConsoleColorsCode.RED_BOLD + "\nPress 1 if you want to fire all your employees, along with your only remaining manager." + ConsoleColorsCode.RESET
+                                                                    + ConsoleColorsCode.GREEN_BOLD + "\nPress 2 If you want to make one of your employees a manager." + ConsoleColorsCode.RESET);
+
+                                                            System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nYour Choice : " + ConsoleColorsCode.RESET);
+                                                            a = scan.nextInt();
+
+                                                            if (a == 1) {
+                                                                for (Employee employee : manager.getWhoIsResponsibleEmployees()) {
+                                                                    ceo.removeEmployee(employee.getUsername());
+                                                                    System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                                    continue;
+                                                                }
+                                                            } else if (a == 2) {
+
+                                                                ceo.viewEmployeeWithPassword(Company.employees);
+
+                                                                System.out.print("Please select your employee username : ");
+                                                                b = scan.nextLine();
+                                                                b = scan.nextLine();
+
+                                                                for (Employee employee : Company.employees) {
+                                                                    if (employee.getUsername().equalsIgnoreCase(b)) {
+
+                                                                        manager1.setFirstName(employee.getFirstName());
+                                                                        manager1.setLastName(employee.getLastName());
+                                                                        manager1.setUsername(employee.getUsername());
+                                                                        manager1.setNumberOfLeaveRequest(employee.getNumberOfLeaveRequest());
+                                                                        manager1.setNumberOfLeavesLeft(employee.getNumberOfLeavesLeft());
+                                                                        manager1.setPassword(employee.getPassword());
+                                                                        manager1.setTotalDayLeaveValue(employee.getTotalDayLeaveValue());
+                                                                        manager1.setUsedLeave(employee.getTotalDayLeaveValue());
+
+                                                                        for (int i = 0; i < Company.employees.size(); i++) {
+                                                                            manager1.getWhoIsResponsibleEmployees().add(Company.employees.get(i));
+
+                                                                        }
+
+                                                                    }
+
+                                                                }
+                                                                Company.removeEmployee(b);
+
                                                             }
                                                         } else if (b.equalsIgnoreCase("NO")) {
                                                             System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction cancelled, you are redirected to the menu..." + ConsoleColorsCode.RESET);
-                                                            continue;
                                                         }
 
                                                     }
 
                                                 }
+                                                Company.managers.add(manager1);
 
                                                 ceo.removeManager(removeUsername);
                                                 System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
@@ -251,11 +288,12 @@ public class Test {
                                 }
 
                             case 3: // View leave request from manager
-                                f.ManagerRequests();
+                                ceo.requests();
                                 continue;
 
                             case 4:
-                                f.confirmationForManagerLeaves(ceo);
+
+                                ceo.confirmationForManagerLeaves(ceo);
                                 continue;
 
                             case 5: // View report of Manager
@@ -277,7 +315,6 @@ public class Test {
                 case 2: // Login verification for manager
 
                     Manager manager = login.checkManager(username, password);
-                    Feedback feedback = new Feedback();
 
                     if (manager != null) {
                         System.out.println(ConsoleColorsCode.GREEN + "\nLogin successful you are redirected to the Manager screen..." + ConsoleColorsCode.RESET);
@@ -305,11 +342,11 @@ public class Test {
                                 manager.requestLeave(request);
                             }
                             case 3 -> // View his/her Employee's leave report
-                                feedback.viewEmployee(manager);
+                                manager.viewEmployee(manager);
                             case 4 -> // View request of his/her allocated employee
-                                feedback.employeeRequests();
+                                manager.requests();
                             case 5 ->
-                                feedback.confirmationForEmployeeLeaves(manager);
+                                manager.confirmationForEmployeeLeaves(manager);
                             case 6 ->
                                 Display();
                             default -> {
@@ -367,12 +404,13 @@ public class Test {
             }
 
         } catch (Exception e) {
-            System.out.println(ConsoleColorsCode.RED_BOLD + "Execption Occurred" + ConsoleColorsCode.RESET);
+            System.out.println(e);
+            e.printStackTrace();
+            //System.out.println(ConsoleColorsCode.RED_BOLD + "Execption Occurred" + ConsoleColorsCode.RESET);
 
             Display();
 
         }
         scan.close();
     }
-
 }

@@ -20,6 +20,9 @@ public class Users {
 
     public Users() {
     }
+    
+    void requests(){
+    }
 
     Random random = new Random();
     //Gives the user a random id which becomes the user's password
