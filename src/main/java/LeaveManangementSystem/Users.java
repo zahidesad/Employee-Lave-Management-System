@@ -21,7 +21,7 @@ public class Users {
     public Users() {
     }
     
-    void requests(){
+    void viewLeaveRequests(){
     }
 
     Random random = new Random();

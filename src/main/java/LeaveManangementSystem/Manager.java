@@ -38,9 +38,9 @@ public class Manager extends Employee {
         }
     }
     
-    //print all the leave requests of employee (Manager)
+    //print all the leave viewLeaveRequests of employee (Manager)
     @Override
-    public void requests() {
+    public void viewLeaveRequests() {
         for (Employee employee : Company.employees) {
             System.out.println(ConsoleColorsCode.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
                     + " wants for " + employee.getNumberOfLeaveRequest() + " days leave" + ConsoleColorsCode.RESET + "\n");

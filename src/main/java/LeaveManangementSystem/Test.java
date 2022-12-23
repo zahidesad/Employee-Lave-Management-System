@@ -169,8 +169,8 @@ public class Test {
                                                         }
                                                     } else if (removeUsername.equalsIgnoreCase(manager.getUsername()) && Company.managers.size() == 1) {
                                                         System.out.println(ConsoleColorsCode.RED_BOLD
-                                                                + "\n\nYou are deleting the only existing manager so employees under this manager will also be fired" + ConsoleColorsCode.RESET);
-                                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\nIf you still want to continue, write YES" + ConsoleColorsCode.RESET);
+                                                                + "\n\nYou are deleting the only existing manager " + ConsoleColorsCode.RESET);
+                                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\nIf you still want to continue, please write YES" + ConsoleColorsCode.RESET);
                                                         System.out.println(ConsoleColorsCode.GREEN_BOLD + "If you made a mistake, please write NO" + ConsoleColorsCode.RESET);
 
                                                         System.out.print("\n\nYour choice : ");
@@ -178,10 +178,10 @@ public class Test {
 
                                                         if (b.equalsIgnoreCase("YES")) {
                                                             System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nYou have 2 options. " + ConsoleColorsCode.RESET
-                                                                    + ConsoleColorsCode.RED_BOLD + "\nPress 1 if you want to fire all your employees, along with your only remaining manager." + ConsoleColorsCode.RESET
+                                                                    + ConsoleColorsCode.RED_BOLD + "\n\nPress 1 if you want to fire all your employees, along with your only remaining manager." + ConsoleColorsCode.RESET
                                                                     + ConsoleColorsCode.GREEN_BOLD + "\nPress 2 If you want to make one of your employees a manager." + ConsoleColorsCode.RESET);
 
-                                                            System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nYour Choice : " + ConsoleColorsCode.RESET);
+                                                            System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nYour Choice : " + ConsoleColorsCode.RESET);
                                                             a = scan.nextInt();
 
                                                             if (a == 1) {
@@ -218,7 +218,11 @@ public class Test {
                                                                     }
 
                                                                 }
+                                                                
                                                                 Company.removeEmployee(b);
+                                                                
+                                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you made a employee named "
+                                                                        + manager1.getFirstName() + " " + manager1.getLastName() + " a manager." + ConsoleColorsCode.RESET);
 
                                                             }
                                                         } else if (b.equalsIgnoreCase("NO")) {
@@ -228,9 +232,10 @@ public class Test {
                                                     }
 
                                                 }
+                                                ceo.removeManager(removeUsername);
                                                 Company.managers.add(manager1);
 
-                                                ceo.removeManager(removeUsername);
+                                                
                                                 System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
                                                 continue;
                                             } else if (b.equalsIgnoreCase("NO")) {
@@ -288,7 +293,7 @@ public class Test {
                                 }
 
                             case 3: // View leave request from manager
-                                ceo.requests();
+                                ceo.viewLeaveRequests();
                                 continue;
 
                             case 4:
@@ -344,7 +349,7 @@ public class Test {
                             case 3 -> // View his/her Employee's leave report
                                 manager.viewEmployee(manager);
                             case 4 -> // View request of his/her allocated employee
-                                manager.requests();
+                                manager.viewLeaveRequests();
                             case 5 ->
                                 manager.confirmationForEmployeeLeaves(manager);
                             case 6 ->
@@ -406,7 +411,7 @@ public class Test {
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
-            //System.out.println(ConsoleColorsCode.RED_BOLD + "Execption Occurred" + ConsoleColorsCode.RESET);
+            System.out.println(ConsoleColorsCode.RED_BOLD + "Execption Occurred" + ConsoleColorsCode.RESET);
 
             Display();
 

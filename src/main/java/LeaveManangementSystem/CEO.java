@@ -31,9 +31,9 @@ public class CEO extends Users {
 
     }
 
-    //print all the leave requests of manager (CEO)
+    //print all the leave viewLeaveRequests of manager (CEO)
     @Override
-    public void requests() {
+    public void viewLeaveRequests() {
         for (Manager manager : Company.managers) {
             System.out.println("\n\nName and surname are : " + ConsoleColorsCode.GREEN_BOLD + manager.getFirstName() + " " + manager.getLastName()
                     + " wants for " + manager.getNumberOfLeaveRequest() + " days leave" + "\n" + ConsoleColorsCode.RESET);
