@@ -17,9 +17,15 @@ public class Test {
     }
 
     public static void main(String[] args) {
+
+        CEO ceo = new CEO();
+        ceo.setUsername("admin");
+        ceo.setPassword("123");
+        Company.users.add(ceo);
+
         Test test = new Test();
         test.Display();
-        Company.ceo = new CEO();
+
     }
 
     void Display() {
@@ -55,7 +61,8 @@ public class Test {
                                            4)Press to grant report manager
                                            5)Press to view report of managers
                                            6)Press to view report of employees
-                                           7)Press to logout""");
+                                           7)Press to view all used leaves
+                                           8)Press to logout""");
 
                         System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
                         a = scan.nextInt();
@@ -83,16 +90,24 @@ public class Test {
                                         int totalDayLeaveValue = scan.nextInt();
 
                                         ceo.createManager(firstName, lastName, ManagerUsername, totalDayLeaveValue);
-                                        Company.managers.get(Company.managers.size() - 1);
+                                        Company.users.get(Company.users.size() - 1);
                                         System.out.println("\n\nYour manager's username is " + '"' + ConsoleColorsCode.GREEN_BOLD + ManagerUsername + ConsoleColorsCode.RESET + '"'
-                                                + "\t\tYour manager's password is " + '"' + ConsoleColorsCode.GREEN_BOLD + Company.managers.get(Company.managers.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
+                                                + "\t\tYour manager's password is " + '"' + ConsoleColorsCode.GREEN_BOLD + Company.users.get(Company.users.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
                                                 + ConsoleColorsCode.GREEN_BOLD + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!!"
                                                 + ConsoleColorsCode.RESET);
 
                                         continue;
                                     }
                                     case 2 -> { //Creates Employee
-                                        if (!Company.managers.isEmpty()) {
+
+                                        int managerCount = 0;
+                                        for (Users user : Company.users) {
+                                            if (user instanceof Manager) {
+                                                managerCount++;
+                                            }
+                                        }
+
+                                        if (managerCount != 0) {
                                             System.out.print("\n\nPlease write your employee's name :  ");
                                             String firstName = scan.nextLine();
                                             firstName = scan.nextLine();
@@ -109,11 +124,22 @@ public class Test {
 
                                             System.out.print("\n\nSelect the manager who will be responsible for the employee : ");
                                             a = scan.nextInt();
-                                            Manager manager = Company.managers.get(a - 1);
+
+                                            Manager manager = null;
+                                            ArrayList<Manager> managers = new ArrayList();
+                                            for (Users user : Company.users) {
+
+                                                if (user instanceof Manager) {
+                                                    managers.add((Manager) user);
+
+                                                }
+
+                                            }
+                                            manager = managers.get(a - 1);
 
                                             Company.createEmployee(firstName, lastName, EmployeeUsername, manager, totalDayLeaveValue);
                                             System.out.println("\n\nYour employee's username is " + '"' + ConsoleColorsCode.GREEN_BOLD + EmployeeUsername + ConsoleColorsCode.RESET + '"'
-                                                    + "\t\tYour employee's password is " + '"' + ConsoleColorsCode.GREEN_BOLD + Company.employees.get(Company.employees.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
+                                                    + "\t\tYour employee's password is " + '"' + ConsoleColorsCode.GREEN_BOLD + Company.users.get(Company.users.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
                                                     + ConsoleColorsCode.GREEN_BOLD + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!"
                                                     + ConsoleColorsCode.RESET);
                                             continue;
@@ -136,9 +162,17 @@ public class Test {
 
                                 switch (a) {
                                     case 1: //Remove Manager
-                                        if (!Company.managers.isEmpty()) {
+
+                                        int managerCount = 0;
+                                        for (Users user : Company.users) {
+                                            if (user instanceof Manager) {
+                                                managerCount++;
+                                            }
+                                        }
+
+                                        if (managerCount != 0) {
                                             String b;
-                                            ceo.viewManagerWithPassword(Company.managers);
+                                            ceo.viewManagerWithPassword();
 
                                             System.out.print("\n\nPlease enter the username of the manager you want to fire : ");
                                             String removeUsername = scan.nextLine();
@@ -151,9 +185,25 @@ public class Test {
                                             System.out.print("\n\nYour choice : ");
                                             b = scan.nextLine();
                                             if (b.equalsIgnoreCase("YES")) {
-                                                Manager manager1 = new Manager();
-                                                for (Manager manager : Company.managers) {
-                                                    if (removeUsername.equalsIgnoreCase(manager.getUsername()) && Company.managers.size() > 1) {
+
+                                                Manager manager = null;
+                                                ArrayList<Manager> managers = new ArrayList();
+                                                
+                                                for (Users user : Company.users) {
+                                                    if (user instanceof Manager) {
+                                                        managers.add((Manager) user);
+                                                        manager = managers.get(a - 1);
+                                                    }
+                                                    
+                                                }
+                                                for (Users user : Company.users) {
+
+                                                    if (user instanceof  Manager) {
+                                                        
+                                                        
+                                                        
+                                                    }
+                                                    if (removeUsername.equalsIgnoreCase(manager.getUsername()) && managers.size() > 1) {
 
                                                         System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nYou fired a manager and the employees working under that manager are now managerless."
                                                                 + " Please select the manager you want to assign these workers to" + ConsoleColorsCode.RESET);
@@ -163,101 +213,58 @@ public class Test {
                                                             System.out.println("\n\nName and surname : " + employee.getFirstName() + " " + employee.getLastName());
                                                             System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nSelect your choice : " + ConsoleColorsCode.RESET);
                                                             a = scan.nextInt();
-                                                            employee.setManager(Company.managers.get(a - 1));
-                                                            Company.managers.get(a - 1).SetWhoIsResponsibleEmployees(employee);
+                                                            employee.setManager(managers.get(a - 1));
+                                                            managers.get(a - 1).SetWhoIsResponsibleEmployees(employee);
 
                                                         }
-                                                    } else if (removeUsername.equalsIgnoreCase(manager.getUsername()) && Company.managers.size() == 1) {
+                                                    } else if (removeUsername.equalsIgnoreCase(manager.getUsername()) && managers.size() == 1) {
                                                         System.out.println(ConsoleColorsCode.RED_BOLD
-                                                                + "\n\nYou are deleting the only existing manager " + ConsoleColorsCode.RESET);
-                                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\nIf you still want to continue, please write YES" + ConsoleColorsCode.RESET);
+                                                                + "\n\nYou are deleting the only existing manager so employees under this manager will also be fired" + ConsoleColorsCode.RESET);
+                                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\nIf you still want to continue, write YES" + ConsoleColorsCode.RESET);
                                                         System.out.println(ConsoleColorsCode.GREEN_BOLD + "If you made a mistake, please write NO" + ConsoleColorsCode.RESET);
 
                                                         System.out.print("\n\nYour choice : ");
                                                         b = scan.nextLine();
 
                                                         if (b.equalsIgnoreCase("YES")) {
-                                                            System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nYou have 2 options. " + ConsoleColorsCode.RESET
-                                                                    + ConsoleColorsCode.RED_BOLD + "\n\nPress 1 if you want to fire all your employees, along with your only remaining manager." + ConsoleColorsCode.RESET
-                                                                    + ConsoleColorsCode.GREEN_BOLD + "\nPress 2 If you want to make one of your employees a manager." + ConsoleColorsCode.RESET);
-
-                                                            System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nYour Choice : " + ConsoleColorsCode.RESET);
-                                                            a = scan.nextInt();
-
-                                                            if (a == 1) {
-                                                                for (Employee employee : manager.getWhoIsResponsibleEmployees()) {
-                                                                    ceo.removeEmployee(employee.getUsername());
-                                                                    System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
-                                                                    continue;
-                                                                }
-                                                            } else if (a == 2) {
-
-                                                                ceo.viewEmployeeWithPassword(Company.employees);
-
-                                                                System.out.print("Please select your employee username : ");
-                                                                b = scan.nextLine();
-                                                                b = scan.nextLine();
-
-                                                                for (Employee employee : Company.employees) {
-                                                                    if (employee.getUsername().equalsIgnoreCase(b)) {
-
-                                                                        manager1.setFirstName(employee.getFirstName());
-                                                                        manager1.setLastName(employee.getLastName());
-                                                                        manager1.setUsername(employee.getUsername());
-                                                                        manager1.setNumberOfLeaveRequest(employee.getNumberOfLeaveRequest());
-                                                                        manager1.setNumberOfLeavesLeft(employee.getNumberOfLeavesLeft());
-                                                                        manager1.setPassword(employee.getPassword());
-                                                                        manager1.setTotalDayLeaveValue(employee.getTotalDayLeaveValue());
-                                                                        manager1.setUsedLeave(employee.getTotalDayLeaveValue());
-
-                                                                        for (int i = 0; i < Company.employees.size(); i++) {
-                                                                            manager1.getWhoIsResponsibleEmployees().add(Company.employees.get(i));
-
-                                                                        }
-
-                                                                    }
-
-                                                                }
-                                                                
-                                                                Company.removeEmployee(b);
-                                                                
-                                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you made a employee named "
-                                                                        + manager1.getFirstName() + " " + manager1.getLastName() + " a manager." + ConsoleColorsCode.RESET);
+                                                            for (Employee employee : manager.getWhoIsResponsibleEmployees()) {
+                                                                ceo.removeEmployee(employee.getUsername());
+                                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
 
                                                             }
+                                                            continue;
                                                         } else if (b.equalsIgnoreCase("NO")) {
                                                             System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction cancelled, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                            continue;
+                                                        } else {
+                                                            System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
+                                                            continue;
                                                         }
+
+                                                    } else {
+                                                        System.out.println(ConsoleColorsCode.RED + "\n\nYou don't have any managers." + ConsoleColorsCode.RESET);
 
                                                     }
 
+                                                    System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
                                                 }
+
                                                 ceo.removeManager(removeUsername);
-                                                Company.managers.add(manager1);
-
-                                                
-                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
-                                                continue;
-                                            } else if (b.equalsIgnoreCase("NO")) {
-                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction cancelled, you are redirected to the menu..." + ConsoleColorsCode.RESET);
-                                                continue;
-                                            } else {
-                                                System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
-                                                continue;
                                             }
-
-                                        } else {
-                                            System.out.println(ConsoleColorsCode.RED + "\n\nYou don't have any managers." + ConsoleColorsCode.RESET);
-
                                         }
-
-                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
                                         continue;
 
                                     case 2: //Remove Employee
-                                        if (!Company.employees.isEmpty()) {
+
+                                        int employeeCount = 0;
+                                        for (Users user : Company.users) {
+                                            if (user instanceof Employee) {
+                                                employeeCount++;
+                                            }
+                                        }
+                                        if (employeeCount != 0) {
                                             String b;
-                                            ceo.viewEmployeeWithPassword(Company.employees);
+                                            ceo.viewEmployeeWithPassword();
 
                                             System.out.print("\n\nPlease enter the username of the employee you want to fire : ");
                                             String removeUsername = scan.nextLine();
@@ -302,21 +309,27 @@ public class Test {
                                 continue;
 
                             case 5: // View report of Manager
-                                ceo.viewManagerWithPassword(Company.managers);
+                                ceo.viewManagerWithPassword();
 
                                 continue;
 
                             case 6: // View report of Employee
-                                ceo.viewEmployeeWithPassword(Company.employees);
+                                ceo.viewEmployeeWithPassword();
 
                                 continue;
-                            case 7: // Display is called for logout
+                            case 7:
+                                System.out.println("Total number of leaves used in the company : " + ceo.SummationOfAllLeaves());
+
+                                continue;
+
+                            case 8: // Display is called for logout
                                 Display();
                             default:
                             //continue;
                         }
 
                     }
+
                 case 2: // Login verification for manager
 
                     Manager manager = login.checkManager(username, password);

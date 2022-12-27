@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @author zahid
  */
 public class Manager extends Employee {
-    
+
     Scanner scan = new Scanner(System.in);
 
     private ArrayList<Employee> WhoIsResponsibleEmployees = new ArrayList();
@@ -28,26 +28,30 @@ public class Manager extends Employee {
 
     //it is showing all employee names, available leaves and used leaves (Manager)
     public void viewEmployee(Manager manager) {
-        for (Employee employee : Company.employees) {
-            if (manager.getUsername().equalsIgnoreCase(employee.getManager().getUsername())) {
-                System.out.println("Name and surname are : " + ConsoleColorsCode.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
-                        + ConsoleColorsCode.RESET + "\t\tAvailable Leaves : " + ConsoleColorsCode.GREEN_BOLD + employee.getNumberOfLeavesLeft() + ConsoleColorsCode.RESET
-                        + "\t\t Used Leaves : " + ConsoleColorsCode.GREEN_BOLD + employee.getUsedLeave() + ConsoleColorsCode.RESET + "\n");
+        for (Users user : Company.users) {
+            if (user instanceof Employee && !(user instanceof Manager)) {
+                Employee employee = (Employee) user;
+                if (manager.getUsername().equalsIgnoreCase(employee.getManager().getUsername())) {
+                    System.out.println("Name and surname are : " + ConsoleColorsCode.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
+                            + ConsoleColorsCode.RESET + "\t\tAvailable Leaves : " + ConsoleColorsCode.GREEN_BOLD + employee.getNumberOfLeavesLeft() + ConsoleColorsCode.RESET
+                            + "\t\t Used Leaves : " + ConsoleColorsCode.GREEN_BOLD + employee.getUsedLeave() + ConsoleColorsCode.RESET + "\n");
+                }
             }
-
         }
     }
-    
+
     //print all the leave viewLeaveRequests of employee (Manager)
     @Override
     public void viewLeaveRequests() {
-        for (Employee employee : Company.employees) {
-            System.out.println(ConsoleColorsCode.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
-                    + " wants for " + employee.getNumberOfLeaveRequest() + " days leave" + ConsoleColorsCode.RESET + "\n");
+        for (Users user : Company.users) {
+            if (user instanceof Employee && !(user instanceof Manager)) {
+                Employee employee = (Employee) user;
+                System.out.println(ConsoleColorsCode.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
+                        + " wants for " + employee.getNumberOfLeaveRequest() + " days leave" + ConsoleColorsCode.RESET + "\n");
+            }
         }
-
     }
-    
+
     //Confirmation for employee leave to be given or not (Manager)
     public void confirmationForEmployeeLeaves(Manager manager) {
         for (Employee responsbileEmployee : manager.getWhoIsResponsibleEmployees()) {
@@ -58,6 +62,7 @@ public class Manager extends Employee {
                 int a;
                 System.out.println("\n\nPlease Select the action you want to do : ");
                 System.out.println("1)Confirm " + "\n" + "2)Reject" + "\n" + "3)Quit");
+                 System.out.println(ConsoleColorsCode.GREEN_BOLD +"\n\nYour Choice : " + ConsoleColorsCode.RESET);
                 a = scan.nextInt();
 
                 switch (a) {
@@ -72,12 +77,12 @@ public class Manager extends Employee {
 
                         responsbileEmployee.setUsedLeave(used);
                         responsbileEmployee.setNumberOfLeaveRequest(0);
-                        System.out.println(ConsoleColorsCode.GREEN_BOLD+ "Leaves granted.\n" + ConsoleColorsCode.RESET);
+                        System.out.println(ConsoleColorsCode.GREEN_BOLD + "Leaves granted.\n" + ConsoleColorsCode.RESET);
                         break;
 
                     // if manager rejects request    
                     case 2:
-                        System.out.println(ConsoleColorsCode.RED_BOLD+ "Leaves Rejected.\n" + ConsoleColorsCode.RESET);
+                        System.out.println(ConsoleColorsCode.RED_BOLD + "Leaves Rejected.\n" + ConsoleColorsCode.RESET);
                         responsbileEmployee.setNumberOfLeaveRequest(0);
                         break;
 
@@ -102,14 +107,8 @@ public class Manager extends Employee {
 
     }
 
-    //Beggining of encapsulation
     public ArrayList<Employee> getWhoIsResponsibleEmployees() {
         return WhoIsResponsibleEmployees;
     }
-
-    public void setWhoIsResponsibleEmployees(ArrayList<Employee> aWhoIsResponsibleEmployees) {
-        WhoIsResponsibleEmployees = aWhoIsResponsibleEmployees;
-    }
-    //End of encapsulation
 
 }

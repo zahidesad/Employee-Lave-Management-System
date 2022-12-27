@@ -8,6 +8,7 @@ public class Employee extends Users {
 
     private Manager manager;
     protected int numberOfLeaveRequest, usedLeave, numberOfLeavesLeft, totalDayLeaveValue;
+    String[] leavesType ={"Hospital", "Annual Leave", "Urgent Leave"} ;
 
     //Beginning of the Constructor
     public Employee(String firstName, String lastName, String username,
@@ -29,7 +30,8 @@ public class Employee extends Users {
                 || totalDayLeaveValue - numberOfLeaveRequest < request) {
             System.out.println(ConsoleColorsCode.RED + "\nYou don't have sufficient free leaves. Please enter a valid number of days leave" + ConsoleColorsCode.RESET);
         } else {
-            System.out.println(ConsoleColorsCode.GREEN+"\nYour request for a " + request + " day leave request has been received "+ConsoleColorsCode.RESET);
+            
+            System.out.println(ConsoleColorsCode.GREEN + "\nYour request for a " + request + " day leave request has been received " + ConsoleColorsCode.RESET);
             numberOfLeaveRequest += request;
 
         }
@@ -37,8 +39,13 @@ public class Employee extends Users {
 
     //Number of leave available
     public void viewleave() {
-        System.out.println(ConsoleColorsCode.GREEN_BOLD+"\n\nYour free leaves are " + getNumberOfLeavesLeft() + " days" 
-        + ConsoleColorsCode.RESET+"\n");
+        System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nYour free leaves are " + getNumberOfLeavesLeft() + " days"
+                + ConsoleColorsCode.RESET + "\n");
+    }
+    
+    //To update the number of leaves left after the leave has been used
+    public void updateLeave(int update) {
+        this.numberOfLeavesLeft = update;
     }
 
     //Beginning of Encapsulation
@@ -86,10 +93,5 @@ public class Employee extends Users {
         this.totalDayLeaveValue = totalDayLeaveValue;
     }
     //End of Encapsulation
-
-    //To update the number of leaves left after the leave has been used
-    public void updateLeave(int update) {
-        this.numberOfLeavesLeft = update;
-    }
 
 }

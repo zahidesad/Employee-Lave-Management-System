@@ -8,15 +8,19 @@ import java.util.ArrayList;
  */
 public class Company {
 
-    static CEO ceo = new CEO();
-    static ArrayList<Manager> managers = new ArrayList();
-    static ArrayList<Employee> employees = new ArrayList();
+    static ArrayList<Users> users = new ArrayList();
 
+    //static CEO ceo = new CEO();
+    //static ArrayList<Manager> managers = new ArrayList();
+    //static ArrayList<Employee> employees = new ArrayList();
     public static void createManager(String firstName, String lastName, String username, int totalDayLeaveValue) {
-        for (Manager manager1 : managers) {
-            if (username.equals(manager1.getUsername())) {
-                System.out.println("This username already exist.");
-                return;
+        for (Users user : Company.users) {
+            if (user instanceof Manager) {
+                Manager manager = (Manager) user;
+                if (username.equals(manager.getUsername())) {
+                    System.out.println("This username already exist.");
+                    return;
+                }
             }
         }
 
@@ -25,16 +29,21 @@ public class Company {
         manager.setLastName(lastName);
         manager.randomIdGenerator();
         manager.setUsername(username);
-        managers.add(manager);
+        users.add(manager);
 
     }
 
     public static void createEmployee(String firstName, String lastName, String username, Manager manager,
             int totalDayLeaveValue) {
-        for (Manager manager1 : managers) {
-            if (username.equals(manager1.getUsername())) {
-                System.out.println("This username already exist.");
-                return;
+        for (Users user : Company.users) {
+            if (user instanceof Employee && !(user instanceof Manager)) {
+                Employee employee = (Employee) user;
+
+                if (username.equals(employee.getUsername())) {
+                    System.out.println("This username already exist.");
+                    return;
+                }
+
             }
 
         }
@@ -44,26 +53,33 @@ public class Company {
         employee.setManager(manager);
         employee.setUsername(username);
 
-        employees.add(employee);
+        users.add(employee);
         manager.SetWhoIsResponsibleEmployees(employee);
 
     }
 
     public static void removeEmployee(String removeUsername) {
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getUsername().equals(removeUsername)) {
-                employees.remove(i);
-
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i) instanceof Employee && !(users.get(i) instanceof Manager)) {
+                Employee employee = (Employee) users.get(i);
+                
+                if (employee.getUsername().equals(removeUsername)) {
+                    users.remove(i);
+                }
             }
         }
 
     }
-    public static void removeManager(String removeUsername){
-         for (int i = 0; i < managers.size(); i++) {
-             if (managers.get(i).getUsername().equals(removeUsername)) {
-                 managers.remove(i);
-             }
-         }
-    
+
+    public static void removeManager(String removeUsername) {
+        for (int i = 0; i < users.size(); i++) {
+            if ((users.get(i) instanceof Manager)) {
+                 Manager manager = (Manager) Company.users.get(i);
+                
+                if (manager.getUsername().equals(removeUsername)) {
+                    users.remove(i);
+                }
+            }
+        }
     }
 }
