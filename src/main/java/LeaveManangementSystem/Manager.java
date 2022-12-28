@@ -62,7 +62,7 @@ public class Manager extends Employee {
                 int a;
                 System.out.println("\n\nPlease Select the action you want to do : ");
                 System.out.println("1)Confirm " + "\n" + "2)Reject" + "\n" + "3)Quit");
-                 System.out.println(ConsoleColorsCode.GREEN_BOLD +"\n\nYour Choice : " + ConsoleColorsCode.RESET);
+                System.out.print(ConsoleColorsCode.GREEN_BOLD +"\n\nYour Choice : " + ConsoleColorsCode.RESET);
                 a = scan.nextInt();
 
                 switch (a) {

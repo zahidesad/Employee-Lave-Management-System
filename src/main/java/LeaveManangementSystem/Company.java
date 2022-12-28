@@ -10,9 +10,7 @@ public class Company {
 
     static ArrayList<Users> users = new ArrayList();
 
-    //static CEO ceo = new CEO();
-    //static ArrayList<Manager> managers = new ArrayList();
-    //static ArrayList<Employee> employees = new ArrayList();
+    
     public static void createManager(String firstName, String lastName, String username, int totalDayLeaveValue) {
         for (Users user : Company.users) {
             if (user instanceof Manager) {

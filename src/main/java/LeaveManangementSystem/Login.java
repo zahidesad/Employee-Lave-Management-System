@@ -13,7 +13,7 @@ public class Login {
                 CEO ceo = (CEO) user;
                 if (username.equalsIgnoreCase(ceo.getUsername()) && password.equals(ceo.getPassword())) {
                     System.out.println(ConsoleColorsCode.GREEN + "\nLogin successful you are redirected to the CEO screen..." + ConsoleColorsCode.RESET);
-                    System.out.print(ConsoleColorsCode.GREEN + "\n----------Welcome " + username + "----------" + ConsoleColorsCode.RESET);
+                    
                     return ceo;
                 }
             }

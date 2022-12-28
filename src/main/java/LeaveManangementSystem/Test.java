@@ -53,7 +53,7 @@ public class Test {
                     }
 
                     while (ceo != null) {
-
+                        System.out.print(ConsoleColorsCode.GREEN + "\n----------Welcome " + username + "----------" + ConsoleColorsCode.RESET);
                         System.out.println("""
                                            \n1)Press to add manager or employee
                                            2)Press to remove manager or employee
@@ -333,7 +333,7 @@ public class Test {
 
                     if (manager != null) {
                         System.out.println(ConsoleColorsCode.GREEN + "\nLogin successful you are redirected to the Manager screen..." + ConsoleColorsCode.RESET);
-                        System.out.print(ConsoleColorsCode.GREEN + "\n----------Welcome " + username + "----------" + ConsoleColorsCode.RESET);
+                        
 
                     } else {
                         System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nWrong usernme or password. Try again!" + ConsoleColorsCode.RESET);
@@ -344,7 +344,8 @@ public class Test {
                     while (manager != null) {
                         int c = 0;
                         int request = 0;
-                        System.out.println("\n\n1)View Leaves \n2)Apply for leave \n3)View Report \n4)View Employee Requests \n5)Grant \n6)Logout");
+                        System.out.print(ConsoleColorsCode.GREEN + "\n----------Welcome " + username + "----------" + ConsoleColorsCode.RESET);
+                        System.out.println("\n1)View Leaves \n2)Apply for leave \n3)View Report \n4)View Employee Requests \n5)Grant \n6)Logout");
                         System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
                         c = scan.nextInt();
                         switch (c) {
@@ -377,11 +378,12 @@ public class Test {
 
                     if (emp != null) {
                         System.out.println(ConsoleColorsCode.GREEN + "\nLogin successful you are redirected to the Employee screen..." + ConsoleColorsCode.RESET);
-                        System.out.print(ConsoleColorsCode.GREEN + "\n----------Welcome " + username + "----------" + ConsoleColorsCode.RESET);
+                       
 
                         while (true) {
                             int b = 0;
                             int request = 0;
+                             System.out.print(ConsoleColorsCode.GREEN + "\n----------Welcome " + username + "----------" + ConsoleColorsCode.RESET);
                             System.out.println("\n1)View  Leaves" + "\n" + "2)Apply for leave " + "\n" + "3)Logout");
 
                             System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
