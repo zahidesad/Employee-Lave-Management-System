@@ -188,68 +188,65 @@ public class Test {
 
                                                 Manager manager = null;
                                                 ArrayList<Manager> managers = new ArrayList();
-                                                
+                                                boolean isUsernameMatch = false;
+
                                                 for (Users user : Company.users) {
+                                                    if (user.getUsername().equalsIgnoreCase(removeUsername)) {
+                                                        isUsernameMatch = true;
+                                                    }
                                                     if (user instanceof Manager) {
                                                         managers.add((Manager) user);
                                                         manager = managers.get(a - 1);
                                                     }
-                                                    
+
                                                 }
-                                                for (Users user : Company.users) {
 
-                                                    if (user instanceof  Manager) {
-                                                        
-                                                        
-                                                        
+                                                if (isUsernameMatch && managers.size() > 1) {
+
+                                                    System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nYou fired a manager and the employees working under that manager are now managerless."
+                                                            + " Please select the manager you want to assign these workers to" + ConsoleColorsCode.RESET);
+                                                    for (Employee employee : manager.getWhoIsResponsibleEmployees()) {
+
+                                                        ceo.viewManagerWithoutPassword();
+                                                        System.out.println("\n\nName and surname : " + employee.getFirstName() + " " + employee.getLastName());
+                                                        System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nSelect your choice : " + ConsoleColorsCode.RESET);
+                                                        a = scan.nextInt();
+                                                        employee.setManager(managers.get(a - 1));
+                                                        managers.get(a - 1).SetWhoIsResponsibleEmployees(employee);
+
                                                     }
-                                                    if (removeUsername.equalsIgnoreCase(manager.getUsername()) && managers.size() > 1) {
+                                                    ceo.removeManager(removeUsername);
+                                                } else if (isUsernameMatch && managers.size() == 1) {
+                                                    System.out.println(ConsoleColorsCode.RED_BOLD
+                                                            + "\n\nYou are deleting the only existing manager so employees under this manager will also be fired" + ConsoleColorsCode.RESET);
+                                                    System.out.println(ConsoleColorsCode.RED_BOLD + "\nIf you still want to continue, write YES" + ConsoleColorsCode.RESET);
+                                                    System.out.println(ConsoleColorsCode.GREEN_BOLD + "If you made a mistake, please write NO" + ConsoleColorsCode.RESET);
 
-                                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nYou fired a manager and the employees working under that manager are now managerless."
-                                                                + " Please select the manager you want to assign these workers to" + ConsoleColorsCode.RESET);
-                                                        for (Employee employee : manager.getWhoIsResponsibleEmployees()) {
+                                                    System.out.print("\n\nYour choice : ");
+                                                    b = scan.nextLine();
 
-                                                            ceo.viewManagerWithoutPassword();
-                                                            System.out.println("\n\nName and surname : " + employee.getFirstName() + " " + employee.getLastName());
-                                                            System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nSelect your choice : " + ConsoleColorsCode.RESET);
-                                                            a = scan.nextInt();
-                                                            employee.setManager(managers.get(a - 1));
-                                                            managers.get(a - 1).SetWhoIsResponsibleEmployees(employee);
-
-                                                        }
-                                                    } else if (removeUsername.equalsIgnoreCase(manager.getUsername()) && managers.size() == 1) {
-                                                        System.out.println(ConsoleColorsCode.RED_BOLD
-                                                                + "\n\nYou are deleting the only existing manager so employees under this manager will also be fired" + ConsoleColorsCode.RESET);
-                                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\nIf you still want to continue, write YES" + ConsoleColorsCode.RESET);
-                                                        System.out.println(ConsoleColorsCode.GREEN_BOLD + "If you made a mistake, please write NO" + ConsoleColorsCode.RESET);
-
-                                                        System.out.print("\n\nYour choice : ");
-                                                        b = scan.nextLine();
-
-                                                        if (b.equalsIgnoreCase("YES")) {
-                                                            for (Employee employee : manager.getWhoIsResponsibleEmployees()) {
-                                                                ceo.removeEmployee(employee.getUsername());
-                                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
-
-                                                            }
-                                                            continue;
-                                                        } else if (b.equalsIgnoreCase("NO")) {
-                                                            System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction cancelled, you are redirected to the menu..." + ConsoleColorsCode.RESET);
-                                                            continue;
-                                                        } else {
-                                                            System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
-                                                            continue;
-                                                        }
-
+                                                    if (b.equalsIgnoreCase("YES")) {
+                                                        //int count = Company.users.size();
+                                                        //for (int i = 0; i < Company.users.size(); i++) {
+                                                        //if (!(Company.users.get(i) instanceof CEO)) {
+                                                        Company.users.subList(1, Company.users.size()).clear();
+                                                        System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                        //  }
+                                                        //}
+                                                        continue;
+                                                    } else if (b.equalsIgnoreCase("NO")) {
+                                                        System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction cancelled, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                        continue;
                                                     } else {
-                                                        System.out.println(ConsoleColorsCode.RED + "\n\nYou don't have any managers." + ConsoleColorsCode.RESET);
-
+                                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
+                                                        continue;
                                                     }
 
-                                                    System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
+                                                } else if (managers.size() == 0) {
+                                                    System.out.println(ConsoleColorsCode.RED + "\n\nYou don't have any managers." + ConsoleColorsCode.RESET);
+
                                                 }
 
-                                                ceo.removeManager(removeUsername);
                                             }
                                         }
                                         continue;

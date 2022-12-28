@@ -64,7 +64,9 @@ public class Company {
                 Employee employee = (Employee) users.get(i);
                 
                 if (employee.getUsername().equals(removeUsername)) {
+                    employee.getManager().getWhoIsResponsibleEmployees().remove(employee);
                     users.remove(i);
+                    
                 }
             }
         }
