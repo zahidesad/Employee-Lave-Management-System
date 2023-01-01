@@ -32,9 +32,9 @@ public class Manager extends Employee {
             if (user instanceof Employee && !(user instanceof Manager)) {
                 Employee employee = (Employee) user;
                 if (manager.getUsername().equalsIgnoreCase(employee.getManager().getUsername())) {
-                    System.out.println("Name and surname are : " + ConsoleColorsCode.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
-                            + ConsoleColorsCode.RESET + "\t\tAvailable Leaves : " + ConsoleColorsCode.GREEN_BOLD + employee.getNumberOfLeavesLeft() + ConsoleColorsCode.RESET
-                            + "\t\t Used Leaves : " + ConsoleColorsCode.GREEN_BOLD + employee.getUsedLeave() + ConsoleColorsCode.RESET + "\n");
+                    System.out.println("Name and surname are : " + Colors.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
+                            + Colors.RESET + "\t\tAvailable Leaves : " + Colors.GREEN_BOLD + employee.getNumberOfLeavesLeft() + Colors.RESET
+                            + "\t\t Used Leaves : " + Colors.GREEN_BOLD + employee.getUsedLeave() + Colors.RESET + "\n");
                 }
             }
         }
@@ -46,8 +46,8 @@ public class Manager extends Employee {
         for (Users user : Company.users) {
             if (user instanceof Employee && !(user instanceof Manager)) {
                 Employee employee = (Employee) user;
-                System.out.println(ConsoleColorsCode.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
-                        + " wants for " + employee.getNumberOfLeaveRequest() + " days leave" + ConsoleColorsCode.RESET + "\n");
+                System.out.println(Colors.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
+                        + " wants for " + employee.getNumberOfLeaveRequest() + " days leave" + Colors.RESET + "\n");
             }
         }
     }
@@ -56,13 +56,13 @@ public class Manager extends Employee {
     public void confirmationForEmployeeLeaves(Manager manager) {
         for (Employee responsbileEmployee : manager.getWhoIsResponsibleEmployees()) {
             if (responsbileEmployee.getNumberOfLeaveRequest() != 0) {
-                System.out.println(ConsoleColorsCode.GREEN_BOLD + responsbileEmployee.getFirstName() + " " + responsbileEmployee.getLastName()
-                        + " wants for " + responsbileEmployee.getNumberOfLeaveRequest() + " days leave" + ConsoleColorsCode.RESET + "\n");
+                System.out.println(Colors.GREEN_BOLD + responsbileEmployee.getFirstName() + " " + responsbileEmployee.getLastName()
+                        + " wants for " + responsbileEmployee.getNumberOfLeaveRequest() + " days leave" + Colors.RESET + "\n");
 
                 int a;
                 System.out.println("\n\nPlease Select the action you want to do : ");
                 System.out.println("1)Confirm " + "\n" + "2)Reject" + "\n" + "3)Quit");
-                System.out.print(ConsoleColorsCode.GREEN_BOLD +"\n\nYour Choice : " + ConsoleColorsCode.RESET);
+                System.out.print(Colors.GREEN_BOLD +"\n\nYour Choice : " + Colors.RESET);
                 a = scan.nextInt();
 
                 switch (a) {
@@ -77,12 +77,12 @@ public class Manager extends Employee {
 
                         responsbileEmployee.setUsedLeave(used);
                         responsbileEmployee.setNumberOfLeaveRequest(0);
-                        System.out.println(ConsoleColorsCode.GREEN_BOLD + "Leaves granted.\n" + ConsoleColorsCode.RESET);
+                        System.out.println(Colors.GREEN_BOLD + "Leaves granted.\n" + Colors.RESET);
                         break;
 
                     // if manager rejects request    
                     case 2:
-                        System.out.println(ConsoleColorsCode.RED_BOLD + "Leaves Rejected.\n" + ConsoleColorsCode.RESET);
+                        System.out.println(Colors.RED_BOLD + "Leaves Rejected.\n" + Colors.RESET);
                         responsbileEmployee.setNumberOfLeaveRequest(0);
                         break;
 

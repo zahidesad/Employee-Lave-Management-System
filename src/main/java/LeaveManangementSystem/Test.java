@@ -35,7 +35,7 @@ public class Test {
         int total = 0;
 
         System.out.println("\n\nSelect any one for login procedure\n\n" + "1.CEO \n" + "2.Manager \n" + "3.Employee");
-        System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
+        System.out.print(Colors.GREEN_BOLD + "\n\nPlease enter your choice : " + Colors.RESET);
 
         try {
             a = scan.nextInt();
@@ -48,12 +48,12 @@ public class Test {
                 case 1:
                     CEO ceo = login.checkCeo(username, password); // Login verification for CEO
                     if (ceo == null) {
-                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nWrong usernme or password. Try again!" + ConsoleColorsCode.RESET);
+                        System.out.println(Colors.RED_BOLD + "\n\nWrong usernme or password. Try again!" + Colors.RESET);
                         Display();
                     }
 
                     while (ceo != null) {
-                        System.out.print(ConsoleColorsCode.GREEN + "\n----------Welcome " + username + "----------" + ConsoleColorsCode.RESET);
+                        System.out.print(Colors.GREEN + "\n----------Welcome " + username + "----------" + Colors.RESET);
                         System.out.println("""
                                            \n1)Press to add manager or employee
                                            2)Press to remove manager or employee
@@ -64,14 +64,14 @@ public class Test {
                                            7)Press to view all used leaves
                                            8)Press to logout""");
 
-                        System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
+                        System.out.print(Colors.GREEN_BOLD + "\n\nPlease enter your choice : " + Colors.RESET);
                         a = scan.nextInt();
 
                         switch (a) {
 
                             case 1:
                                 System.out.println("\n\nPress 1 to add Manager || Press 2 to add Employee\n");
-                                System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
+                                System.out.print(Colors.GREEN_BOLD + "\n\nPlease enter your choice : " + Colors.RESET);
 
                                 a = scan.nextInt();
 
@@ -91,10 +91,10 @@ public class Test {
 
                                         ceo.createManager(firstName, lastName, ManagerUsername, totalDayLeaveValue);
                                         Company.users.get(Company.users.size() - 1);
-                                        System.out.println("\n\nYour manager's username is " + '"' + ConsoleColorsCode.GREEN_BOLD + ManagerUsername + ConsoleColorsCode.RESET + '"'
-                                                + "\t\tYour manager's password is " + '"' + ConsoleColorsCode.GREEN_BOLD + Company.users.get(Company.users.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
-                                                + ConsoleColorsCode.GREEN_BOLD + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!!"
-                                                + ConsoleColorsCode.RESET);
+                                        System.out.println("\n\nYour manager's username is " + '"' + Colors.GREEN_BOLD + ManagerUsername + Colors.RESET + '"'
+                                                + "\t\tYour manager's password is " + '"' + Colors.GREEN_BOLD + Company.users.get(Company.users.size() - 1).getPassword() + Colors.RESET + '"'
+                                                + Colors.GREEN_BOLD + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!!"
+                                                + Colors.RESET);
 
                                         continue;
                                     }
@@ -138,25 +138,25 @@ public class Test {
                                             manager = managers.get(a - 1);
 
                                             Company.createEmployee(firstName, lastName, EmployeeUsername, manager, totalDayLeaveValue);
-                                            System.out.println("\n\nYour employee's username is " + '"' + ConsoleColorsCode.GREEN_BOLD + EmployeeUsername + ConsoleColorsCode.RESET + '"'
-                                                    + "\t\tYour employee's password is " + '"' + ConsoleColorsCode.GREEN_BOLD + Company.users.get(Company.users.size() - 1).getPassword() + ConsoleColorsCode.RESET + '"'
-                                                    + ConsoleColorsCode.GREEN_BOLD + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!"
-                                                    + ConsoleColorsCode.RESET);
+                                            System.out.println("\n\nYour employee's username is " + '"' + Colors.GREEN_BOLD + EmployeeUsername + Colors.RESET + '"'
+                                                    + "\t\tYour employee's password is " + '"' + Colors.GREEN_BOLD + Company.users.get(Company.users.size() - 1).getPassword() + Colors.RESET + '"'
+                                                    + Colors.GREEN_BOLD + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!"
+                                                    + Colors.RESET);
                                             continue;
                                         } else {
-                                            System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nEmployee cannot be added without a manager." + ConsoleColorsCode.RESET);
+                                            System.out.println(Colors.RED_BOLD + "\n\nEmployee cannot be added without a manager." + Colors.RESET);
                                             continue;
                                         }
                                     }
 
                                     default -> {
-                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
+                                        System.out.println(Colors.RED_BOLD + "\n\nPlease enter valid choice" + Colors.RESET);
                                         continue;
                                     }
                                 }
                             case 2:
                                 System.out.println("\n\nPress 1 to remove Manager || Press 2 to remove Employee\n");
-                                System.out.print(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
+                                System.out.print(Colors.RED_BOLD + "\n\nPlease enter your choice : " + Colors.RESET);
 
                                 a = scan.nextInt();
 
@@ -178,9 +178,9 @@ public class Test {
                                             String removeUsername = scan.nextLine();
                                             removeUsername = scan.nextLine();
 
-                                            System.out.println(ConsoleColorsCode.RED + "\nDo you really want to fire your manager " + removeUsername
-                                                    + "? This action cannot be undone.\n\nIf you are sure, please write YES." + ConsoleColorsCode.RESET
-                                                    + ConsoleColorsCode.GREEN_BOLD + "\nIf you made a mistake, please write NO." + ConsoleColorsCode.RESET);
+                                            System.out.println(Colors.RED + "\nDo you really want to fire your manager " + removeUsername
+                                                    + "? This action cannot be undone.\n\nIf you are sure, please write YES." + Colors.RESET
+                                                    + Colors.GREEN_BOLD + "\nIf you made a mistake, please write NO." + Colors.RESET);
 
                                             System.out.print("\n\nYour choice : ");
                                             b = scan.nextLine();
@@ -202,26 +202,26 @@ public class Test {
 
                                                 if (isUsernameMatch && managers.size() > 1) {
                                                     ceo.removeManager(removeUsername); //EMİRHANA SORRR
-                                                    System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nYou fired a manager, if there are employees under this manager, "
+                                                    System.out.println(Colors.RED_BOLD + "\n\nYou fired a manager, if there are employees under this manager, "
                                                             + "these employees are left without a manager. Please select the manager you want to assign these employees to. "
-                                                            + ConsoleColorsCode.RESET);
-                                                    System.out.println(ConsoleColorsCode.GREEN + "If there is no employee under this manager, please ignore this warning." + ConsoleColorsCode.RESET);
+                                                            + Colors.RESET);
+                                                    System.out.println(Colors.GREEN + "If there is no employee under this manager, please ignore this warning." + Colors.RESET);
                                                     for (Employee employee : manager.getWhoIsResponsibleEmployees()) {
 
                                                         ceo.viewManagerWithoutPassword();
                                                         System.out.println("\n\nName and surname : " + employee.getFirstName() + " " + employee.getLastName());
-                                                        System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nSelect your choice : " + ConsoleColorsCode.RESET);
+                                                        System.out.print(Colors.GREEN_BOLD + "\n\nSelect your choice : " + Colors.RESET);
                                                         a = scan.nextInt();
-                                                        employee.setManager(managers.get(a-1));
-                                                        managers.get(a-1).SetWhoIsResponsibleEmployees(employee);
+                                                        employee.setManager(managers.get(a - 1));
+                                                        managers.get(a - 1).SetWhoIsResponsibleEmployees(employee);
 
                                                     }
 
                                                 } else if (isUsernameMatch && managers.size() == 1) {
-                                                    System.out.println(ConsoleColorsCode.RED_BOLD
-                                                            + "\n\nYou are deleting the only existing manager so employees under this manager will also be fired" + ConsoleColorsCode.RESET);
-                                                    System.out.println(ConsoleColorsCode.RED_BOLD + "\nIf you still want to continue, write YES" + ConsoleColorsCode.RESET);
-                                                    System.out.println(ConsoleColorsCode.GREEN_BOLD + "If you made a mistake, please write NO" + ConsoleColorsCode.RESET);
+                                                    System.out.println(Colors.RED_BOLD
+                                                            + "\n\nYou are deleting the only existing manager so employees under this manager will also be fired" + Colors.RESET);
+                                                    System.out.println(Colors.RED_BOLD + "\nIf you still want to continue, write YES" + Colors.RESET);
+                                                    System.out.println(Colors.GREEN_BOLD + "If you made a mistake, please write NO" + Colors.RESET);
 
                                                     System.out.print("\n\nYour choice : ");
                                                     b = scan.nextLine();
@@ -229,19 +229,19 @@ public class Test {
                                                     if (b.equalsIgnoreCase("YES")) {
 
                                                         Company.users.subList(1, Company.users.size()).clear();
-                                                        System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                        System.out.println(Colors.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + Colors.RESET);
 
                                                         continue;
                                                     } else if (b.equalsIgnoreCase("NO")) {
-                                                        System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction cancelled, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                        System.out.println(Colors.GREEN_BOLD + "\n\nAction cancelled, you are redirected to the menu..." + Colors.RESET);
                                                         continue;
                                                     } else {
-                                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
+                                                        System.out.println(Colors.RED_BOLD + "\n\nPlease enter valid choice" + Colors.RESET);
                                                         continue;
                                                     }
 
                                                 } else if (managers.size() == 0) {
-                                                    System.out.println(ConsoleColorsCode.RED + "\n\nYou don't have any managers." + ConsoleColorsCode.RESET);
+                                                    System.out.println(Colors.RED + "\n\nYou don't have any managers." + Colors.RESET);
 
                                                 }
 
@@ -265,31 +265,31 @@ public class Test {
                                             String removeUsername = scan.nextLine();
                                             removeUsername = scan.nextLine();
 
-                                            System.out.println(ConsoleColorsCode.RED + "\nDo you really want to fire your employee " + removeUsername
-                                                    + "? This action cannot be undone.\n\nIf you are sure, please write YES." + ConsoleColorsCode.RESET
-                                                    + ConsoleColorsCode.GREEN_BOLD + "\nIf you made a mistake, please write NO." + ConsoleColorsCode.RESET);
+                                            System.out.println(Colors.RED + "\nDo you really want to fire your employee " + removeUsername
+                                                    + "? This action cannot be undone.\n\nIf you are sure, please write YES." + Colors.RESET
+                                                    + Colors.GREEN_BOLD + "\nIf you made a mistake, please write NO." + Colors.RESET);
 
                                             System.out.print("\n\nYour choice : ");
                                             b = scan.nextLine();
                                             if (b.equalsIgnoreCase("YES")) {
                                                 ceo.removeEmployee(removeUsername);
-                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                System.out.println(Colors.GREEN_BOLD + "\n\nAction successful, you are redirected to the menu..." + Colors.RESET);
                                                 continue;
                                             } else if (b.equalsIgnoreCase("NO")) {
-                                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nAction cancelled, you are redirected to the menu..." + ConsoleColorsCode.RESET);
+                                                System.out.println(Colors.GREEN_BOLD + "\n\nAction cancelled, you are redirected to the menu..." + Colors.RESET);
                                                 continue;
                                             } else {
-                                                System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
+                                                System.out.println(Colors.RED_BOLD + "\n\nPlease enter valid choice" + Colors.RESET);
                                                 continue;
                                             }
 
                                         } else {
-                                            System.out.println(ConsoleColorsCode.RED + "\n\nYou don't have any employees." + ConsoleColorsCode.RESET);
+                                            System.out.println(Colors.RED + "\n\nYou don't have any employees." + Colors.RESET);
 
                                         }
 
                                     default:
-                                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nPlease enter valid choice" + ConsoleColorsCode.RESET);
+                                        System.out.println(Colors.RED_BOLD + "\n\nPlease enter valid choice" + Colors.RESET);
                                         continue;
 
                                 }
@@ -330,10 +330,10 @@ public class Test {
                     Manager manager = login.checkManager(username, password);
 
                     if (manager != null) {
-                        System.out.println(ConsoleColorsCode.GREEN + "\nLogin successful you are redirected to the Manager screen..." + ConsoleColorsCode.RESET);
+                        System.out.println(Colors.GREEN + "\nLogin successful you are redirected to the Manager screen..." + Colors.RESET);
 
                     } else {
-                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nWrong usernme or password. Try again!" + ConsoleColorsCode.RESET);
+                        System.out.println(Colors.RED_BOLD + "\n\nWrong usernme or password. Try again!" + Colors.RESET);
                         Display();
 
                     }
@@ -341,15 +341,15 @@ public class Test {
                     while (manager != null) {
                         int c = 0;
                         int request = 0;
-                        System.out.print(ConsoleColorsCode.GREEN + "\n----------Welcome " + username + "----------" + ConsoleColorsCode.RESET);
+                        System.out.print(Colors.GREEN + "\n----------Welcome " + username + "----------" + Colors.RESET);
                         System.out.println("\n1)View Leaves \n2)Apply for leave \n3)View Report \n4)View Employee Requests \n5)Grant \n6)Logout");
-                        System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
+                        System.out.print(Colors.GREEN_BOLD + "\n\nPlease enter your choice : " + Colors.RESET);
                         c = scan.nextInt();
                         switch (c) {
                             case 1 ->
                                 manager.viewleave();
                             case 2 -> {
-                                System.out.println(ConsoleColorsCode.GREEN_BOLD + "\nYour total leaves are " + manager.getNumberOfLeavesLeft() + " days" + ConsoleColorsCode.RESET);
+                                System.out.println(Colors.GREEN_BOLD + "\nYour total leaves are " + manager.getNumberOfLeavesLeft() + " days" + Colors.RESET);
                                 System.out.print("How many leaves do you want : ");
                                 request = scan.nextInt();
                                 manager.requestLeave(request);
@@ -374,15 +374,15 @@ public class Test {
                     Employee emp = login.checkEmployee(username, password);
 
                     if (emp != null) {
-                        System.out.println(ConsoleColorsCode.GREEN + "\nLogin successful you are redirected to the Employee screen..." + ConsoleColorsCode.RESET);
+                        System.out.println(Colors.GREEN + "\nLogin successful you are redirected to the Employee screen..." + Colors.RESET);
 
                         while (true) {
                             int b = 0;
                             int request = 0;
-                            System.out.print(ConsoleColorsCode.GREEN + "\n----------Welcome " + username + "----------" + ConsoleColorsCode.RESET);
+                            System.out.print(Colors.GREEN + "\n----------Welcome " + username + "----------" + Colors.RESET);
                             System.out.println("\n1)View  Leaves" + "\n" + "2)Apply for leave " + "\n" + "3)Logout");
 
-                            System.out.print(ConsoleColorsCode.GREEN_BOLD + "\n\nPlease enter your choice : " + ConsoleColorsCode.RESET);
+                            System.out.print(Colors.GREEN_BOLD + "\n\nPlease enter your choice : " + Colors.RESET);
 
                             b = scan.nextInt();
                             switch (b) {
@@ -392,7 +392,7 @@ public class Test {
 
                                 case 2 -> {
                                     // Requesting leave
-                                    System.out.println(ConsoleColorsCode.GREEN_BOLD + "\nYour total leaves are: " + emp.getNumberOfLeavesLeft() + ConsoleColorsCode.RESET);
+                                    System.out.println(Colors.GREEN_BOLD + "\nYour total leaves are: " + emp.getNumberOfLeavesLeft() + Colors.RESET);
                                     System.out.print("\n\nHow many leaves do you want : ");
                                     request = scan.nextInt();
                                     emp.requestLeave(request);
@@ -407,11 +407,11 @@ public class Test {
 
                     } else {
 
-                        System.out.println(ConsoleColorsCode.RED_BOLD + "\n\nWrong usernme or password. Try again!" + ConsoleColorsCode.RESET);
+                        System.out.println(Colors.RED_BOLD + "\n\nWrong usernme or password. Try again!" + Colors.RESET);
                         Display();
                     }
                 default:
-                    System.out.println(ConsoleColorsCode.RED_BOLD + "Enter valid number " + ConsoleColorsCode.RESET);
+                    System.out.println(Colors.RED_BOLD + "Enter valid number " + Colors.RESET);
                     Display();
 
             }
@@ -419,7 +419,7 @@ public class Test {
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
-            System.out.println(ConsoleColorsCode.RED_BOLD + "Execption Occurred" + ConsoleColorsCode.RESET);
+            System.out.println(Colors.RED_BOLD + "Execption Occurred" + Colors.RESET);
 
             Display();
 

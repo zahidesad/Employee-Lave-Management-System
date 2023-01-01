@@ -49,8 +49,8 @@ public class CEO extends Users {
         for (Users user : Company.users) {
             if (user instanceof Manager) {
                 Manager manager = (Manager) user;
-                System.out.println("\n\nName and surname are : " + ConsoleColorsCode.GREEN_BOLD + manager.getFirstName() + " " + manager.getLastName()
-                        + " wants for " + manager.getNumberOfLeaveRequest() + " days leave" + "\n" + ConsoleColorsCode.RESET);
+                System.out.println("\n\nName and surname are : " + Colors.GREEN_BOLD + manager.getFirstName() + " " + manager.getLastName()
+                        + " wants for " + manager.getNumberOfLeaveRequest() + " days leave" + "\n" + Colors.RESET);
             }
         }
     }
@@ -60,13 +60,13 @@ public class CEO extends Users {
             if (user instanceof Manager) {
                 Manager manager = (Manager) user;
                 if (manager.getNumberOfLeaveRequest() != 0) {
-                    System.out.println(ConsoleColorsCode.GREEN_BOLD + manager.getUsername()
-                            + " wants for " + manager.getNumberOfLeaveRequest() + " days leave" + "\n" + ConsoleColorsCode.RESET);
+                    System.out.println(Colors.GREEN_BOLD + manager.getUsername()
+                            + " wants for " + manager.getNumberOfLeaveRequest() + " days leave" + "\n" + Colors.RESET);
 
                     int a;
                     System.out.println("Please Select the action you want to do : ");
                     System.out.println("1)Confirm " + "\n" + "2)Reject" + "\n" + "3)Quit");
-                    System.out.print(ConsoleColorsCode.GREEN_BOLD +"\n\nYour Choice : " + ConsoleColorsCode.RESET);
+                    System.out.print(Colors.GREEN_BOLD +"\n\nYour Choice : " + Colors.RESET);
                     a = scan.nextInt();
 
                     switch (a) {
@@ -81,17 +81,17 @@ public class CEO extends Users {
 
                             manager.setUsedLeave(used);
                             manager.setNumberOfLeaveRequest(0);
-                            System.out.println(ConsoleColorsCode.GREEN_BOLD + "Leaves granted.\n" + ConsoleColorsCode.RESET);
+                            System.out.println(Colors.GREEN_BOLD + "Leaves granted.\n" + Colors.RESET);
                             break;
 
                         // if manager rejects request    
                         case 2:
-                            System.out.println(ConsoleColorsCode.RED_BOLD + "Leaves Rejected.\n" + ConsoleColorsCode.RESET);
+                            System.out.println(Colors.RED_BOLD + "Leaves Rejected.\n" + Colors.RESET);
                             manager.setNumberOfLeaveRequest(0);
                             break;
 
                         case 3:
-                            System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nLogging out from the system..." + ConsoleColorsCode.RESET);
+                            System.out.println(Colors.GREEN_BOLD + "\n\nLogging out from the system..." + Colors.RESET);
                             break;
                         default:
                             break;
@@ -106,34 +106,34 @@ public class CEO extends Users {
     }
 
     public void viewEmployeeWithPassword() {
-        System.out.println(ConsoleColorsCode.BLUE_BOLD + "\n\nEmployee List With Password :" + ConsoleColorsCode.RESET);
+        System.out.println(Colors.BLUE_BOLD + "\n\nEmployee List With Password :" + Colors.RESET);
 
         for (int i = 0; i < Company.users.size(); i++) {
             if (Company.users.get(i) instanceof Employee && !(Company.users.get(i) instanceof Manager)) {
                 Employee employee = (Employee) Company.users.get(i);
-                System.out.println(ConsoleColorsCode.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
-                        + ConsoleColorsCode.RESET + "\t\tUsername is : " + ConsoleColorsCode.GREEN_BOLD + employee.getUsername() + ConsoleColorsCode.RESET
-                        + "\t\tPassword is : " + ConsoleColorsCode.GREEN_BOLD + employee.getPassword() + ConsoleColorsCode.RESET);
+                System.out.println(Colors.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
+                        + Colors.RESET + "\t\tUsername is : " + Colors.GREEN_BOLD + employee.getUsername() + Colors.RESET
+                        + "\t\tPassword is : " + Colors.GREEN_BOLD + employee.getPassword() + Colors.RESET);
             }
         }
     }
 
     public void viewManagerWithPassword() {
-        System.out.println(ConsoleColorsCode.BLUE_BOLD + "\n\nManager List With Password :" + ConsoleColorsCode.RESET);
+        System.out.println(Colors.BLUE_BOLD + "\n\nManager List With Password :" + Colors.RESET);
 
         for (int i = 0; i < Company.users.size(); i++) {
             if (Company.users.get(i) instanceof Manager) {
                 Manager manager = (Manager) Company.users.get(i);
-                System.out.println(ConsoleColorsCode.GREEN_BOLD + manager.getFirstName() + " " + manager.getLastName()
-                        + ConsoleColorsCode.RESET + "\t\tUsername is : " + ConsoleColorsCode.GREEN_BOLD + manager.getUsername() + ConsoleColorsCode.RESET
-                        + "\t\tPassword is : " + ConsoleColorsCode.GREEN_BOLD + manager.getPassword() + ConsoleColorsCode.RESET);
+                System.out.println(Colors.GREEN_BOLD + manager.getFirstName() + " " + manager.getLastName()
+                        + Colors.RESET + "\t\tUsername is : " + Colors.GREEN_BOLD + manager.getUsername() + Colors.RESET
+                        + "\t\tPassword is : " + Colors.GREEN_BOLD + manager.getPassword() + Colors.RESET);
 
             }
         }
     }
 
     public void viewManagerWithoutPassword() {
-        System.out.println(ConsoleColorsCode.BLUE_BOLD + "\n\nManager List :" + ConsoleColorsCode.RESET);
+        System.out.println(Colors.BLUE_BOLD + "\n\nManager List :" + Colors.RESET);
         int count=1;
         for (int i = 0; i < Company.users.size(); i++) {
             if (Company.users.get(i) instanceof Manager) {

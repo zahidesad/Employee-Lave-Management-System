@@ -5,7 +5,7 @@ package LeaveManangementSystem;
  *
  * @author zahid
  */
-public class ConsoleColorsCode {
+public class Colors {
     public static final String RESET = "\033[0m";  // Text Reset
 
     // Regular Colors

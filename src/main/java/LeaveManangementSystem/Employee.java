@@ -28,10 +28,10 @@ public class Employee extends Users {
         // it checks if requested number of leaves are available or not
         if (request > numberOfLeavesLeft || request > numberOfLeavesLeft - numberOfLeaveRequest
                 || totalDayLeaveValue - numberOfLeaveRequest < request) {
-            System.out.println(ConsoleColorsCode.RED + "\nYou don't have sufficient free leaves. Please enter a valid number of days leave" + ConsoleColorsCode.RESET);
+            System.out.println(Colors.RED + "\nYou don't have sufficient free leaves. Please enter a valid number of days leave" + Colors.RESET);
         } else {
             
-            System.out.println(ConsoleColorsCode.GREEN + "\nYour request for a " + request + " day leave request has been received " + ConsoleColorsCode.RESET);
+            System.out.println(Colors.GREEN + "\nYour request for a " + request + " day leave request has been received " + Colors.RESET);
             numberOfLeaveRequest += request;
 
         }
@@ -39,8 +39,8 @@ public class Employee extends Users {
 
     //Number of leave available
     public void viewleave() {
-        System.out.println(ConsoleColorsCode.GREEN_BOLD + "\n\nYour free leaves are " + getNumberOfLeavesLeft() + " days"
-                + ConsoleColorsCode.RESET + "\n");
+        System.out.println(Colors.GREEN_BOLD + "\n\nYour free leaves are " + getNumberOfLeavesLeft() + " days"
+                + Colors.RESET + "\n");
     }
     
     //To update the number of leaves left after the leave has been used
