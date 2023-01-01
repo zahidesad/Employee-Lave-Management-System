@@ -8,7 +8,7 @@ public class Employee extends Users {
 
     private Manager manager;
     protected int numberOfLeaveRequest, usedLeave, numberOfLeavesLeft, totalDayLeaveValue;
-    String[] leavesType ={"Hospital", "Annual Leave", "Urgent Leave"} ;
+    
 
     //Beginning of the Constructor
     public Employee(String firstName, String lastName, String username,

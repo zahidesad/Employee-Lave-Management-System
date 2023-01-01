@@ -102,7 +102,7 @@ public class Manager extends Employee {
     }
 
     //Used to determine which employee will work under which manager   
-    void SetWhoIsResponsibleEmployees(Employee employee) {
+    public void SetWhoIsResponsibleEmployees(Employee employee) {
         getWhoIsResponsibleEmployees().add(employee);
 
     }

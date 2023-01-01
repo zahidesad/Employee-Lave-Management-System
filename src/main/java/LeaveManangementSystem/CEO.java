@@ -43,7 +43,7 @@ public class CEO extends Users {
         return total;
     }
 
-    //print all the leave viewLeaveRequests of manager (CEO)
+    //print all the leave viewLeaveRequests of manager 
     @Override
     public void viewLeaveRequests() {
         for (Users user : Company.users) {
