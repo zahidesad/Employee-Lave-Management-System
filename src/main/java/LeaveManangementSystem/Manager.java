@@ -52,7 +52,7 @@ public class Manager extends Employee {
         }
     }
 
-    //Confirmation for employee leave to be given or not (Manager)
+    //Confirmation for employee leave to be given or not 
     public void confirmationForEmployeeLeaves(Manager manager) {
         for (Employee responsbileEmployee : manager.getWhoIsResponsibleEmployees()) {
             if (responsbileEmployee.getNumberOfLeaveRequest() != 0) {

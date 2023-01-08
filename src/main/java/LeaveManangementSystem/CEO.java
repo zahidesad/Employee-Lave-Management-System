@@ -75,7 +75,7 @@ public class CEO extends Users {
         System.out.println("Total leaves used in type of other : " + otherCount);
 
     }
-
+    // //Confirmation for manager leave to be given or not 
     public void confirmationForManagerLeaves(CEO ceo) {
         for (Users user : Company.users) {
             if (user instanceof Manager) {

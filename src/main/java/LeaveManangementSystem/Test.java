@@ -432,8 +432,6 @@ public class Test {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
-            e.printStackTrace();
             System.out.println(Colors.RED_BOLD + "Execption Occurred" + Colors.RESET);
 
             Display();
