@@ -1,6 +1,7 @@
 # Leave_Management_Systmem
 
-![EmployeeLeaveTracker](https://user-images.githubusercontent.com/116666407/211184947-34274c08-a6cd-4921-9e66-2020ce8b0056.jpg)
+![image](https://user-images.githubusercontent.com/116666407/211210537-d393d792-0019-4b86-a599-1658fcf23234.png)
+
 
 
 Aim of The Project and Requirements:
@@ -23,9 +24,10 @@ Initially, there is only one CEO in the company, whose username is admin and pas
 9)	The CEO only deals with managers' leave requests. The manager of that worker deals with the leave requests of the employees.
 10)	CEO and Managers have the right to confirm and reject leave, if the leave is confirmed, it is deducted from the number of annual leave entitlements. If rejected, the number of annual leave entitlements remains constant.
 11)	The CEO can view the list of managers and employees with their passwords.
-12)	The CEO can see the total number of leaves used in the company.
+12)	The CEO can see the total number of leaves used in the company and what types of these leaves are used.
 13)	Managers can view their annual leave count.
-14)	Managers can apply for leave, if they enter more than the annual leave number, they will get an error.
+14)	Managers can apply for leave. During the application, the manager enters the type of leave and the number of days leave. If the leave requested is more than the number of annual leave, they will receive an error.
 15)	Managers can view, approve, and reject leave requests from employees working under them.
-16)	Employees can view their annual leave entitlements and apply for leave.
+16)	Employees can apply for a leave. During the application, the employee enters the leave type and the number of days leave. If the requested leave is more than the annual leave, they will receive an error.
+
 
