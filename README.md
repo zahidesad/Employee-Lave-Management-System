@@ -3,10 +3,12 @@
 ![EmployeeLeaveTracker](https://user-images.githubusercontent.com/116666407/211184947-34274c08-a6cd-4921-9e66-2020ce8b0056.jpg)
 
 
- Aim of The Project and Requirements:
+Aim of The Project and Requirements:
+
 The purpose of this project is to keep track of the leaves of employees and managers in a company. For the project to work correctly, it is necessary to have the JDK (Java Development Kit) and the IDE named Apache NetBeans. Also, if you want the color codes in the project to work, you must have Apache Maven version 3.3.3 or below.
 
 Rules:
+
 Initially, there is only one CEO in the company, whose username is admin and password is 123. There can be only one CEO in the company. No additions or removals can be made for the CEO. You can run the system by coming to the "Test" class and pressing the Shift+F6 keys. You can log in to the system by entering the CEO's username and password by pressing the 1 button on the screen that appears.  Before explaining the rules, there are colors in the console. It was made to make the front-end part of this project more appealing to the eye. All rules are explained below in bullet points.
 
 
