@@ -50,9 +50,30 @@ public class CEO extends Users {
             if (user instanceof Manager) {
                 Manager manager = (Manager) user;
                 System.out.println("\n\nName and surname are : " + Colors.GREEN_BOLD + manager.getFirstName() + " " + manager.getLastName()
-                        + " wants for " + manager.getNumberOfLeaveRequest() + " days leave" + "\n" + Colors.RESET);
+                        + " wants " + manager.getNumberOfLeaveRequest() + " days leave to " + manager.leaveReason + "\n" + Colors.RESET);
             }
         }
+    }
+
+    public void viewLeaveRequestStatistics() {
+        int deathCount = 0;
+        int illnessCount = 0;
+        int marriageCount = 0;
+        int otherCount = 0;
+        for (Users user : Company.users) {
+            if (user instanceof Employee employee) {
+                deathCount += employee.getDeathCount();
+                illnessCount += employee.getIllnessCount();
+                marriageCount += employee.getMarriageCount();
+                otherCount += employee.getOtherCount();
+
+            }
+        }
+        System.out.println("Total leaves used in type of death : " + deathCount);
+        System.out.println("Total leaves used in type of illness : " + illnessCount);
+        System.out.println("Total leaves used in type of marriage : " + marriageCount);
+        System.out.println("Total leaves used in type of other : " + otherCount);
+
     }
 
     public void confirmationForManagerLeaves(CEO ceo) {
@@ -60,13 +81,13 @@ public class CEO extends Users {
             if (user instanceof Manager) {
                 Manager manager = (Manager) user;
                 if (manager.getNumberOfLeaveRequest() != 0) {
-                    System.out.println(Colors.GREEN_BOLD + manager.getUsername()
-                            + " wants for " + manager.getNumberOfLeaveRequest() + " days leave" + "\n" + Colors.RESET);
+                    System.out.println("\n\nName and surname are : " + Colors.GREEN_BOLD + manager.getFirstName() + " " + manager.getLastName()
+                            + " wants " + manager.getNumberOfLeaveRequest() + " days leave to " + manager.leaveReason + "\n" + Colors.RESET);
 
                     int a;
                     System.out.println("Please Select the action you want to do : ");
                     System.out.println("1)Confirm " + "\n" + "2)Reject" + "\n" + "3)Quit");
-                    System.out.print(Colors.GREEN_BOLD +"\n\nYour Choice : " + Colors.RESET);
+                    System.out.print(Colors.GREEN_BOLD + "\n\nYour Choice : " + Colors.RESET);
                     a = scan.nextInt();
 
                     switch (a) {
@@ -81,6 +102,23 @@ public class CEO extends Users {
 
                             manager.setUsedLeave(used);
                             manager.setNumberOfLeaveRequest(0);
+
+                            switch (manager.leaveReason) {
+                                case "DEATH":
+                                    manager.setDeathCount(deduct + manager.getDeathCount());
+                                    break;
+                                case "ILLNESS":
+                                    manager.setIllnessCount(deduct + manager.getIllnessCount());
+                                    break;
+                                case "MARRIAGE":
+                                    manager.setMarriageCount(deduct + manager.getMarriageCount());
+                                    break;
+                                case "OTHER":
+                                    manager.setOtherCount(deduct + manager.getOtherCount());
+                                    break;
+
+                            }
+
                             System.out.println(Colors.GREEN_BOLD + "Leaves granted.\n" + Colors.RESET);
                             break;
 
@@ -134,7 +172,7 @@ public class CEO extends Users {
 
     public void viewManagerWithoutPassword() {
         System.out.println(Colors.BLUE_BOLD + "\n\nManager List :" + Colors.RESET);
-        int count=1;
+        int count = 1;
         for (int i = 0; i < Company.users.size(); i++) {
             if (Company.users.get(i) instanceof Manager) {
                 Manager manager = (Manager) Company.users.get(i);

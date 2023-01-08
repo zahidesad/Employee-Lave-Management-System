@@ -1,5 +1,6 @@
 package LeaveManangementSystem;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -59,9 +60,9 @@ public class Test {
                                            2)Press to remove manager or employee
                                            3)Press to view Manager Requests
                                            4)Press to grant report manager
-                                           5)Press to view report of managers
-                                           6)Press to view report of employees
-                                           7)Press to view all used leaves
+                                           5)Press to view list of managers
+                                           6)Press to view list of employees
+                                           7)Press to view all used leaves and statistics
                                            8)Press to logout""");
 
                         System.out.print(Colors.GREEN_BOLD + "\n\nPlease enter your choice : " + Colors.RESET);
@@ -93,7 +94,7 @@ public class Test {
                                         Company.users.get(Company.users.size() - 1);
                                         System.out.println("\n\nYour manager's username is " + '"' + Colors.GREEN_BOLD + ManagerUsername + Colors.RESET + '"'
                                                 + "\t\tYour manager's password is " + '"' + Colors.GREEN_BOLD + Company.users.get(Company.users.size() - 1).getPassword() + Colors.RESET + '"'
-                                                + Colors.GREEN_BOLD + "\n\n!!!!!Please forward this informations to your employee so that he/she can log into the system!!!!!!"
+                                                + Colors.GREEN_BOLD + "\n\n!!!!!Please forward this informations to your manager so that he/she can log into the system!!!!!!"
                                                 + Colors.RESET);
 
                                         continue;
@@ -201,7 +202,7 @@ public class Test {
                                                 }
 
                                                 if (isUsernameMatch && managers.size() > 1) {
-                                                    ceo.removeManager(removeUsername); //EMİRHANA SORRR
+                                                    ceo.removeManager(removeUsername);
                                                     System.out.println(Colors.RED_BOLD + "\n\nYou fired a manager, if there are employees under this manager, "
                                                             + "these employees are left without a manager. Please select the manager you want to assign these employees to. "
                                                             + Colors.RESET);
@@ -313,7 +314,9 @@ public class Test {
 
                                 continue;
                             case 7:
-                                System.out.println("Total number of leaves used in the company : " + ceo.SummationOfAllLeaves());
+                                System.out.print(Colors.BLUE_BOLD+"Total number of leaves used in the company : "+Colors.RESET + ceo.SummationOfAllLeaves());
+                                System.out.println(Colors.BLUE_BOLD+"\n\n-------------Statistics-------------" + Colors.RESET);
+                                ceo.viewLeaveRequestStatistics();
 
                                 continue;
 
@@ -341,6 +344,7 @@ public class Test {
                     while (manager != null) {
                         int c = 0;
                         int request = 0;
+                        int leaveReason = 0;
                         System.out.print(Colors.GREEN + "\n----------Welcome " + username + "----------" + Colors.RESET);
                         System.out.println("\n1)View Leaves \n2)Apply for leave \n3)View Report \n4)View Employee Requests \n5)Grant \n6)Logout");
                         System.out.print(Colors.GREEN_BOLD + "\n\nPlease enter your choice : " + Colors.RESET);
@@ -350,9 +354,14 @@ public class Test {
                                 manager.viewleave();
                             case 2 -> {
                                 System.out.println(Colors.GREEN_BOLD + "\nYour total leaves are " + manager.getNumberOfLeavesLeft() + " days" + Colors.RESET);
-                                System.out.print("How many leaves do you want : ");
+                                System.out.print(Colors.BLUE_BOLD + "\n\nHow many leaves do you want : " + Colors.RESET);
                                 request = scan.nextInt();
-                                manager.requestLeave(request);
+                                
+                                System.out.print(Colors.BLUE_BOLD + "\nFor what reason do you want leave?" + Colors.RESET);
+                                System.out.println("\n\n1)DEATH" + "\n2)ILLNESS" + "\n3)MARRIAGE" + "\n4)OTHER");
+                                System.out.print(Colors.GREEN + "\nYour Choice:" + Colors.RESET);
+                                leaveReason = scan.nextInt();
+                                manager.requestLeave(request, leaveReason);
                             }
                             case 3 -> // View his/her Employee's leave report
                                 manager.viewEmployee(manager);
@@ -379,6 +388,7 @@ public class Test {
                         while (true) {
                             int b = 0;
                             int request = 0;
+                            int leaveReason =0;
                             System.out.print(Colors.GREEN + "\n----------Welcome " + username + "----------" + Colors.RESET);
                             System.out.println("\n1)View  Leaves" + "\n" + "2)Apply for leave " + "\n" + "3)Logout");
 
@@ -395,7 +405,12 @@ public class Test {
                                     System.out.println(Colors.GREEN_BOLD + "\nYour total leaves are: " + emp.getNumberOfLeavesLeft() + Colors.RESET);
                                     System.out.print("\n\nHow many leaves do you want : ");
                                     request = scan.nextInt();
-                                    emp.requestLeave(request);
+                                    System.out.print(Colors.BLUE_BOLD + "\nFor what reason do you want leave?" + Colors.RESET);
+                                    System.out.println("\n\n1)DEATH" + "\n2)ILLNESS" + "\n3)MARRIAGE" + "\n4)OTHER");
+                                    System.out.print(Colors.GREEN + "\nYour Choice:" + Colors.RESET);
+                                    leaveReason = scan.nextInt();
+                                    emp.requestLeave(request, leaveReason);
+                                    
                                 }
                                 case 3 -> //Logout
                                     Display();

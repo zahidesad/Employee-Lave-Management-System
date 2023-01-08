@@ -46,8 +46,8 @@ public class Manager extends Employee {
         for (Users user : Company.users) {
             if (user instanceof Employee && !(user instanceof Manager)) {
                 Employee employee = (Employee) user;
-                System.out.println(Colors.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
-                        + " wants for " + employee.getNumberOfLeaveRequest() + " days leave" + Colors.RESET + "\n");
+                System.out.println("\n\nName and surname are : " + Colors.GREEN_BOLD + employee.getFirstName() + " " + employee.getLastName()
+                        + " wants " + employee.getNumberOfLeaveRequest() + " days leave to " + employee.leaveReason + "\n" + Colors.RESET);
             }
         }
     }
@@ -56,13 +56,13 @@ public class Manager extends Employee {
     public void confirmationForEmployeeLeaves(Manager manager) {
         for (Employee responsbileEmployee : manager.getWhoIsResponsibleEmployees()) {
             if (responsbileEmployee.getNumberOfLeaveRequest() != 0) {
-                System.out.println(Colors.GREEN_BOLD + responsbileEmployee.getFirstName() + " " + responsbileEmployee.getLastName()
-                        + " wants for " + responsbileEmployee.getNumberOfLeaveRequest() + " days leave" + Colors.RESET + "\n");
+                System.out.println("\n\nName and surname are : " + Colors.GREEN_BOLD + responsbileEmployee.getFirstName() + " " + responsbileEmployee.getLastName()
+                        + " wants " + responsbileEmployee.getNumberOfLeaveRequest() + " days leave to " + responsbileEmployee.leaveReason + "\n" + Colors.RESET);
 
                 int a;
                 System.out.println("\n\nPlease Select the action you want to do : ");
                 System.out.println("1)Confirm " + "\n" + "2)Reject" + "\n" + "3)Quit");
-                System.out.print(Colors.GREEN_BOLD +"\n\nYour Choice : " + Colors.RESET);
+                System.out.print(Colors.GREEN_BOLD + "\n\nYour Choice : " + Colors.RESET);
                 a = scan.nextInt();
 
                 switch (a) {
@@ -77,6 +77,23 @@ public class Manager extends Employee {
 
                         responsbileEmployee.setUsedLeave(used);
                         responsbileEmployee.setNumberOfLeaveRequest(0);
+
+                        switch (responsbileEmployee.leaveReason) {
+                            case "DEATH":
+                                responsbileEmployee.setDeathCount(deduct + responsbileEmployee.getDeathCount());
+                                break;
+                            case "ILLNESS":
+                                responsbileEmployee.setIllnessCount(deduct + responsbileEmployee.getIllnessCount());
+                                break;
+                            case "MARRIAGE":
+                                responsbileEmployee.setMarriageCount(deduct + responsbileEmployee.getMarriageCount());
+                                break;
+                            case "OTHER":
+                                responsbileEmployee.setOtherCount(deduct + responsbileEmployee.getOtherCount());
+                                break;
+
+                        }
+
                         System.out.println(Colors.GREEN_BOLD + "Leaves granted.\n" + Colors.RESET);
                         break;
 
