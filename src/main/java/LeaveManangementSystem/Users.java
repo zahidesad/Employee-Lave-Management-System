@@ -40,7 +40,7 @@ public class Users {
         if (firstName.length() != 0) {
             this.firstName = firstName;
         } else {
-            System.out.println("Please write your name");
+            System.out.println("Please write your name. ");
         }
     }
 
@@ -52,7 +52,7 @@ public class Users {
         if (lastName.length() != 0) {
             this.lastName = lastName;
         } else {
-            System.out.println("Please write your surname");
+            System.out.println("Please write your surname. ");
         }
     }
 

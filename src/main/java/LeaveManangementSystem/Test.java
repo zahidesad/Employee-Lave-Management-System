@@ -213,8 +213,8 @@ public class Test {
                                                         System.out.println("\n\nName and surname : " + employee.getFirstName() + " " + employee.getLastName());
                                                         System.out.print(Colors.GREEN_BOLD + "\n\nSelect your choice : " + Colors.RESET);
                                                         a = scan.nextInt();
-                                                        employee.setManager(managers.get(a - 1));
-                                                        managers.get(a - 1).SetWhoIsResponsibleEmployees(employee);
+                                                        employee.setManager(managers.get(a));
+                                                        managers.get(a).SetWhoIsResponsibleEmployees(employee);
 
                                                     }
 
@@ -314,8 +314,8 @@ public class Test {
 
                                 continue;
                             case 7:
-                                System.out.print(Colors.BLUE_BOLD+"Total number of leaves used in the company : "+Colors.RESET + ceo.SummationOfAllLeaves());
-                                System.out.println(Colors.BLUE_BOLD+"\n\n-------------Statistics-------------" + Colors.RESET);
+                                System.out.print(Colors.BLUE_BOLD + "Total number of leaves used in the company : " + Colors.RESET + ceo.SummationOfAllLeaves());
+                                System.out.println(Colors.BLUE_BOLD + "\n\n-------------Statistics-------------" + Colors.RESET);
                                 ceo.viewLeaveRequestStatistics();
 
                                 continue;
@@ -356,7 +356,7 @@ public class Test {
                                 System.out.println(Colors.GREEN_BOLD + "\nYour total leaves are " + manager.getNumberOfLeavesLeft() + " days" + Colors.RESET);
                                 System.out.print(Colors.BLUE_BOLD + "\n\nHow many leaves do you want : " + Colors.RESET);
                                 request = scan.nextInt();
-                                
+
                                 System.out.print(Colors.BLUE_BOLD + "\nFor what reason do you want leave?" + Colors.RESET);
                                 System.out.println("\n\n1)DEATH" + "\n2)ILLNESS" + "\n3)MARRIAGE" + "\n4)OTHER");
                                 System.out.print(Colors.GREEN + "\nYour Choice:" + Colors.RESET);
@@ -388,7 +388,7 @@ public class Test {
                         while (true) {
                             int b = 0;
                             int request = 0;
-                            int leaveReason =0;
+                            int leaveReason = 0;
                             System.out.print(Colors.GREEN + "\n----------Welcome " + username + "----------" + Colors.RESET);
                             System.out.println("\n1)View  Leaves" + "\n" + "2)Apply for leave " + "\n" + "3)Logout");
 
@@ -410,7 +410,7 @@ public class Test {
                                     System.out.print(Colors.GREEN + "\nYour Choice:" + Colors.RESET);
                                     leaveReason = scan.nextInt();
                                     emp.requestLeave(request, leaveReason);
-                                    
+
                                 }
                                 case 3 -> //Logout
                                     Display();
